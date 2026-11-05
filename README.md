@@ -1,18 +1,17 @@
-# DWD WoW Forever Addons
+# WoW Forever Addon Pack
 
-Private download for the November 4, 2026 addon pack. Includes 24 addon folders,
-Main1/Main2 UI layouts, QuestieDB, and the DWD/Plater profile restore fixes.
+An addon pack for **World of Warcraft: Forever**, with 24 addon folders, DWD custom
+addons, optional Main1/Main2 UI layouts, Questie and QuestieDB, and the DWD/Plater
+profile restore fixes. For Forever 1.60.1 (interface 16001).
 
-## Download
+**[Download the latest WoW Forever addon ZIP](https://github.com/dellmas/DWD-WoW-Forever-Addons/releases/latest/download/DWD-Forever-Addons.zip)**
 
-[Download the addon ZIP](https://github.com/dellmas/DWD-WoW-Forever-Addons/releases/download/v1.0.0/DWD-Forever-Addons-2026-11-04-v1.0.0.zip)
+[Latest release notes](https://github.com/dellmas/DWD-WoW-Forever-Addons/releases/latest)
 
-[Release page](https://github.com/dellmas/DWD-WoW-Forever-Addons/releases/tag/v1.0.0)
+The download is public. No GitHub account or invitation is required.
+Download the addon ZIP, rather than GitHub's automatic Source code archives.
 
-Private GitHub links require a signed-in account with repository access.
-The owner can also download the ZIP and send it directly to the recipient.
-
-## Install
+## Installation and commands
 
 ```text
 DWD Forever Addon Pack - 2026-11-04
@@ -54,9 +53,9 @@ Screen size and resolution can affect where the imported windows appear.
 Keep the custom Bartender4_Forever folder; do not enable a second Bartender
 installation alongside it. Third-party files retain their original notices.
 
-PRIVATE DOWNLOAD
-GitHub private repository/release links require a signed-in account with access.
-This ZIP can also be sent directly to the recipient.
+PUBLIC DOWNLOAD
+https://github.com/dellmas/DWD-WoW-Forever-Addons/releases/latest/download/DWD-Forever-Addons.zip
+No GitHub sign-in or invitation is required.
 ```
 
 Original addon author and license notices are retained inside the ZIP.
