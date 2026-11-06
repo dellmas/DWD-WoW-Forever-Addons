@@ -11,10 +11,12 @@ profile restore fixes. For Forever 1.60.1 (interface 16001).
 The download is public. No GitHub account or invitation is required.
 Download the addon ZIP, rather than GitHub's automatic Source code archives.
 
-## Latest fix (v1.0.2)
+## Latest fix (v1.0.3)
 
-Fixes DWD profile restores replacing Questie settings windows, which caused
-an error when Escape closed windows. Update the addon folders and `/reload`.
+Fixes Party XP matching when party members have different internal realms.
+Both players should update and `/reload`, then `/dwdxp sync`.
+Use `/dwdxp status` to inspect message delivery and matching.
+Includes the previous Questie-window and Plater-default fixes.
 
 ## Installation and commands
 
