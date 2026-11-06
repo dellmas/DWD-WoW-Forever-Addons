@@ -11,6 +11,11 @@ profile restore fixes. For Forever 1.60.1 (interface 16001).
 The download is public. No GitHub account or invitation is required.
 Download the addon ZIP, rather than GitHub's automatic Source code archives.
 
+## Latest fix (v1.0.2)
+
+Fixes DWD profile restores replacing Questie settings windows, which caused
+an error when Escape closed windows. Update the addon folders and `/reload`.
+
 ## Installation and commands
 
 ```text
