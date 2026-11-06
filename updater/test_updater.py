@@ -72,6 +72,12 @@ class TestUpdater(unittest.TestCase):
     def test_current_release_clears_stale_pending(self):
         self.app.check();u.write_json(self.data/'pending.json',{'stale':True})
         self.app.check();self.assertFalse((self.data/'pending.json').exists())
+    def test_restart_notice_survives_recheck_until_game_closes(self):
+        self.running=True;self.app.check(requested=True)
+        status=self.app.check();self.assertTrue(status['restart_required'])
+        self.assertIn('Restart WoW',status['message'])
+        self.running=False;status=self.app.check()
+        self.assertFalse(status['restart_required']);self.assertFalse(status['reload_required'])
     def test_pending_applies_after_exit(self):
         self.running=True;self.app.check();self.running=False
         result=self.app.apply_pending();self.assertEqual(result['phase'],'updated')
