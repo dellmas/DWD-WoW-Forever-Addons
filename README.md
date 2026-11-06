@@ -24,6 +24,22 @@ Only DWD addons are managed. CurseForge addons, Bartender4_Forever and WTF setti
 are left alone. No Python installation or GitHub login is needed.
 [Updater instructions and source](updater/README.txt).
 
+## Current addon fix (v1.0.5)
+
+Fix MobCount triggering a secret-aura access error through GameTooltip.RefreshData.
+
+MobCount no longer asks Blizzard to rebuild the shared tooltip after a kill.
+The tooltip can switch from a unit to an aura between the kill event and the
+deferred callback, causing a protected aura read from tainted addon code.
+Kill totals now appear only during Blizzard's natural unit-tooltip processing.
+Counts still update immediately in the database; the displayed tooltip total
+updates on its next native rebuild or when the unit is hovered again.
+
+DWD MobCount version: 0.0.1-forever.22. The regression test credits a kill with
+an aura tooltip present, verifies no forced or deferred rebuild, prevents
+duplicate credit, and verifies the next unit tooltip shows the updated total.
+
+
 ## Installation and commands
 
 ```text
