@@ -1,26 +1,14 @@
-DWD updater feed maintenance
+Release maintenance after the CurseForge transition
 
-Every future latest GitHub release must include DWD-Updates.json and
-DWD-Only-Addons.zip. The manifest release value must equal that release's tag.
-Older app installations deliberately stop with an error if a feed is missing;
-they never fall back to overwriting addons from the full pack.
+Keep DWD-Updates.json and DWD-Only-Addons.zip on every latest release for older
+updater installations. The manifest release must equal the GitHub tag.
+The manifest may contain a subset of the fixed allowlist. For v1.0.6 it contains
+only the five supported folders still present in the full pack. Do not restore
+the retired recovery or updater-status helpers just to populate that allowlist.
+Party Highlight and RankUp are outside the legacy allowlist; use CurseForge.
+Validate the manifest and unpacked checksums with updater.validate_manifest
+and updater.unpack_verified before publishing. Do not include any WTF data,
+account settings, junctions, credentials, or personal profile seeds.
 
-Build portable copies of the six custom DWD addon folders, plus
-DWD_UpdaterStatus. Do not use the live junction-based addon folders as a feed.
-Keep the existing portable profile mirror in !DWD_Profiles_Loader.
-Update the installed-release string in DWD_UpdaterStatus.lua.
-
-Run:
-python updater/build_feed.py --addons <portable AddOns directory> --output <asset directory> --release v1.0.5
-
-Test updater/test_updater.py and relevant Lua regression tests. Attach the two
-feed files to a draft release alongside the full manual ZIP and any updater
-installer. Verify asset checksums, then publish as latest. Do not upload any
-WTF data, account settings, SavedVariablesLink junctions or credentials.
-
-The updater uses a fixed DWD allowlist. A new addon folder or changed feed
-schema needs an updater program revision. It does not self-update its EXE;
-replace the installer explicitly for app changes.
-
-Requested Update Now installs with WoW running. Automatic checks stage until
-WoW exits. Keep both behaviors in future changes.
+The full pack uses unmodified CurseForge archives. CURSEFORGE-PROJECTS.json
+records their source URLs, archive checksums, folders, and per-file checksums.
