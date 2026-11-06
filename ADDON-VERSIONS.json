@@ -9,7 +9,7 @@
   },
   {
     "addon": "!DWD_Profiles_Loader",
-    "version": "1.0.7-live",
+    "version": "1.0.8-live",
     "interface": "16001",
     "project_ids": [
       1786247
@@ -114,7 +114,7 @@
   },
   {
     "addon": "DWD_Profiles",
-    "version": "1.0.29-live",
+    "version": "1.0.30-live",
     "interface": "16001",
     "project_ids": [
       1786247

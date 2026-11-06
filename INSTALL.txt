@@ -1,4 +1,4 @@
-WoW Forever Addon Pack v1.0.6 - CurseForge recognition
+WoW Forever Addon Pack v1.0.7 - CurseForge recognition
 For WoW Forever 1.60.1 (interface 16001).
 
 27 addon folders are supplied by 21 CurseForge projects. Bundled modules appear
@@ -36,3 +36,7 @@ junctions are included. Original author and license notices are retained.
 PUBLIC DOWNLOAD
 https://github.com/dellmas/DWD-WoW-Forever-Addons/releases/latest/download/DWD-Forever-Addons.zip
 No GitHub sign-in is required.
+
+PROFILE RESTORE FIX
+DWD Profiles 1.0.30 preserves TomTom defaults when restoring sparse saved layouts.
+Reload after updating existing installations. Your SavedVariables are not changed by this ZIP.

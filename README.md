@@ -1,7 +1,7 @@
 # WoW Forever Addon Pack
 
 A CurseForge-recognized addon pack for **World of Warcraft: Forever 1.60.1**
-(interface 16001). Version **v1.0.6** contains **27 addon folders from 21
+(interface 16001). Version **v1.0.7** contains **27 addon folders from 21
 CurseForge projects**, including official Bartender4, Questie, QuestieDB, and
 all six DWD addons. Bundled modules appear under their parent project.
 
@@ -35,6 +35,13 @@ The addon files are unchanged copies of their CurseForge release archives.
 Original author and license notices are retained. The version and provenance
 manifests identify every packaged file; no local compatibility patches are
 applied to third-party addons.
+
+## Current fix: TomTom profile restores
+
+DWD Profiles 1.0.30 and early loader 1.0.8 preserve TomTom's initialized
+defaults when restoring sparse saved layouts. This prevents the missing
+coordinate-block update interval from causing errors every frame. TomTom's
+files and personal saved settings are unchanged. Reload after updating.
 
 ## Settings
 
