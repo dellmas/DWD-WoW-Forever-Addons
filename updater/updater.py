@@ -4,7 +4,7 @@ import argparse, contextlib, ctypes, datetime as dt, hashlib, json, os
 from pathlib import Path, PurePosixPath
 import shutil, subprocess, sys, threading, time, urllib.parse, urllib.request, zipfile
 
-VERSION = '1.0.0'
+VERSION = '1.0.1'
 REPOSITORY = 'dellmas/DWD-WoW-Forever-Addons'
 API_URL = 'https://api.github.com/repos/' + REPOSITORY + '/releases/latest'
 ALLOWED = frozenset(('!DWD_Profiles_Loader','DWD_Profiles','DWD_Profiles_Recovery',
@@ -279,7 +279,15 @@ class Updater:
             selected=[n for n in m['addons'] if (addons/n).is_dir() or n=='DWD_UpdaterStatus']
             if all(matches(addons/n,m,n) for n in selected):
                 (self.data/'pending.json').unlink(missing_ok=True)
-                return self.status(phase='current',installed_release=m['release'],pending_release=None,message='DWD addons are up to date.')
+                previous=read_json(self.data/'status.json',{})
+                running=self.process_check()
+                restart=running and bool(previous.get('restart_required'))
+                reload=running and bool(previous.get('reload_required'))
+                message='DWD addons are up to date on disk.'
+                if restart: message+=' Restart WoW to load added/removed files.'
+                elif reload: message+=' Type /reload if you have not reloaded since the update.'
+                return self.status(phase='current',installed_release=m['release'],pending_release=None,
+                    restart_required=restart,reload_required=reload,message=message)
             stage=self.data/'cache'/hashlib.sha256(json.dumps(m,sort_keys=True).encode()).hexdigest()
             if not all(matches(stage/n,m,n) for n in m['addons']):
                 stage.mkdir(parents=True,exist_ok=True)
