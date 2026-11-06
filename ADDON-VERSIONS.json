@@ -118,5 +118,10 @@
     "addon": "TomTom",
     "version": "v4.4.0-release",
     "interface": "120105, 120007, 120100, 11509, 16001, 20506, 38002, 40402, 50504"
+  },
+  {
+    "addon": "DWD_UpdaterStatus",
+    "version": "1.0.0",
+    "interface": "16001"
   }
 ]
