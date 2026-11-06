@@ -1,0 +1,26 @@
+DWD updater feed maintenance
+
+Every future latest GitHub release must include DWD-Updates.json and
+DWD-Only-Addons.zip. The manifest release value must equal that release's tag.
+Older app installations deliberately stop with an error if a feed is missing;
+they never fall back to overwriting addons from the full pack.
+
+Build portable copies of the six custom DWD addon folders, plus
+DWD_UpdaterStatus. Do not use the live junction-based addon folders as a feed.
+Keep the existing portable profile mirror in !DWD_Profiles_Loader.
+Update the installed-release string in DWD_UpdaterStatus.lua.
+
+Run:
+python updater/build_feed.py --addons <portable AddOns directory> --output <asset directory> --release v1.0.5
+
+Test updater/test_updater.py and relevant Lua regression tests. Attach the two
+feed files to a draft release alongside the full manual ZIP and any updater
+installer. Verify asset checksums, then publish as latest. Do not upload any
+WTF data, account settings, SavedVariablesLink junctions or credentials.
+
+The updater uses a fixed DWD allowlist. A new addon folder or changed feed
+schema needs an updater program revision. It does not self-update its EXE;
+replace the installer explicitly for app changes.
+
+Requested Update Now installs with WoW running. Automatic checks stage until
+WoW exits. Keep both behaviors in future changes.
