@@ -1,4 +1,4 @@
-WoW Forever Addon Pack v1.0.10
+WoW Forever Addon Pack v1.0.11
 Updated November 6, 2026: the DWD Profiles addons have been removed.
 This archive contains 25 addon folders. Use the latest release for current versions.
 
@@ -22,3 +22,8 @@ Tooltip Mover 1.1.0-forever.9: tooltip scaling preserves its screen anchor,
 config shows current scale and font size, and the quest-text move button has
 its own row. Reload after updating, then open /ttmove config. Settings remain
 in your WTF folder. CurseForge approval/indexing may delay update detection.
+
+MobCount 0.0.1-forever.23: Total Killed now identifies the creature displayed
+by the tooltip. Player/pet tooltips are excluded. Counts are omitted while
+Forever hides identity, rather than using an unrelated cached target. Run
+/reload after updating. Existing kill totals and settings remain in WTF.

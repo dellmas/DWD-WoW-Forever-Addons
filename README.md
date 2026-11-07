@@ -1,7 +1,7 @@
 # WoW Forever Addon Pack
 
 A CurseForge-recognized addon pack for **World of Warcraft: Forever 1.60.1**
-(interface 16001). Version **v1.0.10** contains **25 addon folders from 20
+(interface 16001). Version **v1.0.11** contains **25 addon folders from 20
 CurseForge projects**, including official Bartender4, Questie, QuestieDB, and
 all five DWD addons. Bundled modules appear under their parent project.
 
@@ -26,7 +26,23 @@ addon settings and inactive saved profile data are retained.
 The previous public ZIP downloads and legacy updater feeds have also had
 these addons removed. Each remaining addon saves its own settings.
 
-## Current fix: Tooltip Mover scale and config
+## Current fix: MobCount player tooltip counts
+
+MobCount 0.0.1-forever.23 fixes an unrelated mob's Total Killed line appearing
+on player tooltips during combat. It resolves the creature actually displayed
+by the tooltip and excludes players and pets. If Forever hides the identity
+or reaction, it omits the count until those values are readable. It never
+substitutes the last selected target. Saved totals and settings are preserved.
+
+Run `/reload` after updating. Eighteen Lua 5.1 checks passed, including the
+original player-tooltip bug, different hovered creatures, secret identities,
+party-frame hovers, postcombat corpse credit, and avoiding aura rebuilds.
+The live result still needs an in-game check. CurseForge approval/indexing
+may delay updates in its app.
+
+[MobCount source](source/Forever/DWD_MobCount)
+
+## Previous fix: Tooltip Mover scale and config
 
 Tooltip Mover 1.1.0-forever.9 preserves the tooltip's screen anchor when changing
 scale. Its config panel displays the current scale, font size, and selected
