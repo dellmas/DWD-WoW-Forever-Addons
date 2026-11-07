@@ -81,6 +81,14 @@
     ]
   },
   {
+    "addon": "DWD_BagnonHelper-Forever",
+    "version": "1.0.0-forever.1",
+    "interface": "16001",
+    "project_ids": [
+      1788396
+    ]
+  },
+  {
     "addon": "DWD_MobCount",
     "version": "0.0.1-forever.23",
     "interface": "16001",

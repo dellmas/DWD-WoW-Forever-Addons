@@ -1,0 +1,11 @@
+## X-Curse-Project-ID: 1788396
+## Interface: 16001
+## AllowLoadGameType: camelot, forever
+## Title: DWD Bagnon Helper - Forever
+## Notes: Keeps Bagnon's inventory open until its close X is clicked.
+## Author: dellmas
+## Version: 1.0.0-forever.1
+## Dependencies: Bagnon
+## Category: Bags & Inventory
+
+Core.lua

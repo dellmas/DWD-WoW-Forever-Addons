@@ -1,6 +1,6 @@
-WoW Forever Addon Pack v1.0.11
+WoW Forever Addon Pack v1.0.12
 Updated November 6, 2026: the DWD Profiles addons have been removed.
-This archive contains 25 addon folders. Use the latest release for current versions.
+This archive contains 26 addon folders. Use the latest release for current versions.
 
 1. Close WoW and back up your AddOns and WTF folders.
 2. Remove DWD_Profiles, !DWD_Profiles_Loader, and the obsolete DWD_Profiles_Recovery
@@ -27,3 +27,11 @@ MobCount 0.0.1-forever.23: Total Killed now identifies the creature displayed
 by the tooltip. Player/pet tooltips are excluded. Counts are omitted while
 Forever hides identity, rather than using an unrelated cached target. Run
 /reload after updating. Existing kill totals and settings remain in WTF.
+
+DWD Bagnon Helper - Forever is new in this release. Restart WoW to discover
+the new folder. Enable it together with Bagnon. Open inventory normally; only
+its close X closes it. Map, Escape and bag toggles leave it open. /dwdbags
+shows status. Disable the helper and reload to restore normal closing. No
+Bagnon files or settings are modified. New CurseForge project approval and
+indexing are pending. The legacy desktop updater does not install this helper;
+use the full ZIP or CurseForge.

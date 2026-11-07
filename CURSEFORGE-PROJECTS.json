@@ -1,10 +1,10 @@
 {
-  "pack_version": "v1.0.11",
+  "pack_version": "v1.0.12",
   "game": "WoW Forever",
   "game_version": "1.60.1",
   "interface": 16001,
-  "addon_folders": 25,
-  "curseforge_projects": 20,
+  "addon_folders": 26,
+  "curseforge_projects": 21,
   "projects": [
     {
       "name": "BagBrother",
@@ -687,6 +687,22 @@
         "BugSack/retail.lua": "4d363041a14afa3690ae367f53af080fa8c30054078798d1d670407eafccae1e",
         "BugSack/sack.lua": "fddc6bc9a246203beb5cf173bedb3939e43408ed46d738ac5c260b26f5e5d943",
         "BugSack/embeds.xml": "84d9b8bf4280e5e32ec2e82982a7789621e13360eb4cf943afeb6d85c11f60e4"
+      }
+    },
+    {
+      "name": "DWD Bagnon Helper",
+      "project_id": 1788396,
+      "file_id": 9485177,
+      "filename": "DWD-BagnonHelper-1.0.0-forever.1.zip",
+      "download_url": "https://edge.forgecdn.net/files/9485/177/DWD-BagnonHelper-1.0.0-forever.1.zip",
+      "sha256": "527bae0c3993710dbbb9d41fc46147ab6b92902a265ded0f6ffe600551be5475",
+      "folders": [
+        "DWD_BagnonHelper-Forever"
+      ],
+      "files": {
+        "DWD_BagnonHelper-Forever/Core.lua": "e6b68f80882ec0573ccfa1eb3489698659dc688671ff8e43b19f22a338bd3c5c",
+        "DWD_BagnonHelper-Forever/DWD_BagnonHelper-Forever.toc": "68090015bb655a8c8a49dbd71b1a958030d122c909e624b9b09b8ffc9e73cf70",
+        "DWD_BagnonHelper-Forever/README.txt": "90b07979dd5855bc9604c2f6313e370cce002873824cd1e8c15e8dc99e6d4285"
       }
     },
     {

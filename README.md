@@ -1,9 +1,9 @@
 # WoW Forever Addon Pack
 
 A CurseForge-recognized addon pack for **World of Warcraft: Forever 1.60.1**
-(interface 16001). Version **v1.0.11** contains **25 addon folders from 20
+(interface 16001). Version **v1.0.12** contains **26 addon folders from 21
 CurseForge projects**, including official Bartender4, Questie, QuestieDB, and
-all five DWD addons. Bundled modules appear under their parent project.
+all six DWD addons. Bundled modules appear under their parent project.
 
 **[Download the addon ZIP](https://github.com/dellmas/DWD-WoW-Forever-Addons/releases/latest/download/DWD-Forever-Addons.zip)**
 
@@ -26,7 +26,29 @@ addon settings and inactive saved profile data are retained.
 The previous public ZIP downloads and legacy updater feeds have also had
 these addons removed. Each remaining addon saves its own settings.
 
-## Current fix: MobCount player tooltip counts
+## New: Bagnon inventory stays open
+
+DWD Bagnon Helper - Forever 1.0.0-forever.1 keeps Bagnon inventory open until
+you click its close X. Map maximization, Escape, bag toggles, and interaction
+close requests leave inventory open. Bag keys still open a closed inventory.
+Bank windows and other UI windows keep their usual behavior. The X stays
+available with skins that normally hide it.
+
+Restart WoW to discover this new addon folder, and enable both the helper and
+Bagnon. `/dwdbags` shows status. Disable the helper and reload to restore
+normal closing. Bagnon/BagBrother files and saved settings remain unchanged.
+Twenty Lua 5.1 checks exercise the installed 12.1.8 window-management code;
+the live result still needs checking in-game. Global UI hiding, loading,
+logout, and UI restarts remain under WoW's control. Protected native bypasses
+in combat wait until combat ends to restore the window.
+
+The new CurseForge project and file require moderation before app detection.
+Install this helper from the full ZIP or CurseForge; the legacy updater does
+not include newly added addon names.
+
+[Helper source](source/Forever/DWD_BagnonHelper-Forever)
+
+## Previous fix: MobCount player tooltip counts
 
 MobCount 0.0.1-forever.23 fixes an unrelated mob's Total Killed line appearing
 on player tooltips during combat. It resolves the creature actually displayed
@@ -89,7 +111,7 @@ requires loading the update and checking the visible result.
    migration before switching. Never enable both Bartender copies.
 4. In CurseForge, select **World of Warcraft > Forever**, then open the
    three-dot menu beside Run Game and choose **Scan addons folder > Scan**.
-5. Check **My Addons**. The included folders are supplied by 20 CurseForge projects. Approval/indexing can affect detection elsewhere;
+5. Check **My Addons**. The included folders are supplied by 21 CurseForge projects. Approval/indexing can affect detection elsewhere;
    refresh or rescan after processing completes.
 
 The addon files are unchanged copies of their CurseForge release archives.
@@ -106,6 +128,7 @@ This download does not migrate layouts from the old beta Bartender database.
 
 ## DWD addons
 
+- DWD Bagnon Helper: inventory closes only when its X is clicked.
 - DWD Mob Kill Counter: unit-tooltip kill counts, including the aura-taint fix.
 - Party XP Bars: party XP exchange and sync diagnostics.
 - DWD Tooltip Mover: configurable tooltip positioning.
