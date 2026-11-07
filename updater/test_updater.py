@@ -20,6 +20,14 @@ def package(version='v-test',extra=False):
     return manifest,blob
 
 class TestUpdater(unittest.TestCase):
+    def test_retired_profile_addons_are_rejected_by_feed_validation(self):
+        for retired in ('DWD_Profiles','!DWD_Profiles_Loader','DWD_Profiles_Recovery'):
+            with self.subTest(addon=retired):
+                manifest=json.loads(json.dumps(self.m))
+                manifest['addons'].append(retired)
+                manifest['files'][retired+'/'+retired+'.toc']='0'*64
+                with self.assertRaises(ValueError):u.validate_manifest(manifest)
+
     def setUp(self):
         self.temp=tempfile.TemporaryDirectory();self.base=Path(self.temp.name)
         self.root=self.base/'_forever_';self.root.mkdir();(self.root/'Wow.exe').write_bytes(b'test')

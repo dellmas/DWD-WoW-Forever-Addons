@@ -8,14 +8,6 @@
     ]
   },
   {
-    "addon": "!DWD_Profiles_Loader",
-    "version": "1.0.8-live",
-    "interface": "16001",
-    "project_ids": [
-      1786247
-    ]
-  },
-  {
     "addon": "BagBrother",
     "version": "bundled module",
     "interface": "120105, 50504, 40402, 30404, 20506, 16001, 11509",
@@ -110,14 +102,6 @@
     "interface": "16001",
     "project_ids": [
       1338949
-    ]
-  },
-  {
-    "addon": "DWD_Profiles",
-    "version": "1.0.30-live",
-    "interface": "16001",
-    "project_ids": [
-      1786247
     ]
   },
   {

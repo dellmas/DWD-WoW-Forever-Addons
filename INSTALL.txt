@@ -1,48 +1,19 @@
-WoW Forever Addon Pack v1.0.8 - CurseForge recognition
-For WoW Forever 1.60.1 (interface 16001).
+WoW Forever Addon Pack v1.0.9
+Updated November 6, 2026: the DWD Profiles addons have been removed.
+This archive contains 25 addon folders. Use the latest release for current versions.
 
-27 addon folders are supplied by 21 CurseForge projects. Bundled modules appear
-under their parent project in CurseForge; they do not all have separate rows.
-All addon files are copied unchanged from their corresponding release archives.
+1. Close WoW and back up your AddOns and WTF folders.
+2. Remove DWD_Profiles, !DWD_Profiles_Loader, and the obsolete DWD_Profiles_Recovery
+   folder from Interface/AddOns if present. Leave your WTF saved settings intact.
+3. Replace the other included addon folders with their clean copies from AddOns.
+4. In CurseForge select World of Warcraft > Forever > Scan addons folder > Scan.
+5. Reopen WoW. Each remaining addon saves its own settings; no DWD profile restore
+   or named layout loader is required. Enable both Questie and QuestieDB.
 
-INSTALL AND ENABLE CURSEFORGE UPDATE TRACKING
-1. Close WoW. Back up your existing Interface/AddOns and WTF folders.
-2. For each supplied addon, move its previous folder out of Interface/AddOns
-   into a backup directory, then copy the clean folder from this ZIP's AddOns.
-   Replacing whole folders avoids leftover beta files changing recognition.
-3. If present, also archive Bartender4_Forever, DWD_Profiles_Recovery, and
-   DWD_UpdaterStatus outside AddOns. The first is replaced by official Bartender4;
-   the other two are legacy helpers omitted from this CurseForge-managed pack.
-   Do not enable both Bartender copies. The old beta Bartender layout uses a
-   different database and needs a separate layout migration before switching.
-4. Leave your WTF folder alone. This ZIP contains no WTF/account files or saved
-   profiles and does not migrate settings. Existing Main1/Main2 profiles in your
-   own SavedVariables are retained; no personal layouts are supplied here.
-5. In CurseForge, select World of Warcraft and the Forever installation.
-   Use the three-dot menu beside Run Game > Scan addons folder > Scan.
-6. Check My Addons. This exact collection was recognized as 21 projects on the
-   source installation. Approval, indexing, app version, or later release changes
-   can affect detection on another PC. Refresh or rescan after processing completes.
-7. Reopen WoW. Enable both Questie and QuestieDB, plus desired addons.
+The ZIP does not delete or replace your saved settings. Existing preset files may
+remain in WTF as inactive data. Disable the legacy DWD desktop updater when using
+CurseForge for updates. Historical release feeds have also had the retired addons
+removed so they cannot be reinstalled through those feeds.
 
-If the old DWD desktop updater is enabled, use its Disable Auto Updates button
-when moving to CurseForge management, so two tools do not replace the same folders.
-CurseForge manages updates outside WoW. Restart or reload WoW after updates as
-required by the addon; a reload cannot discover a newly added addon folder.
-
-No personal settings, character data, error logs, account folders, or filesystem
-junctions are included. Original author and license notices are retained.
-
-PUBLIC DOWNLOAD
+Latest full pack:
 https://github.com/dellmas/DWD-WoW-Forever-Addons/releases/latest/download/DWD-Forever-Addons.zip
-No GitHub sign-in is required.
-
-PROFILE RESTORE FIX
-DWD Profiles 1.0.30 preserves TomTom defaults when restoring sparse saved layouts.
-Reload after updating existing installations. Your SavedVariables are not changed by this ZIP.
-
-RANKUP VISIBLE-BUTTON FIX
-New abilities now use visible buttons and their current stance/bar page.
-After /reload, use /dwdrank place Battle Shout to place that already learned
-ability on an empty visible button. Existing hidden copies are retained.
-Use /dwdrank visible to return to the default after setting a raw-slot range.

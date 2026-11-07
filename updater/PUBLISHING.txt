@@ -1,14 +1,13 @@
-Release maintenance after the CurseForge transition
+Legacy feed maintenance
 
-Keep DWD-Updates.json and DWD-Only-Addons.zip on every latest release for older
+Every latest release retains DWD-Updates.json and DWD-Only-Addons.zip for older
 updater installations. The manifest release must equal the GitHub tag.
-The manifest may contain a subset of the fixed allowlist. For v1.0.6 it contains
-only the five supported folders still present in the full pack. Do not restore
-the retired recovery or updater-status helpers just to populate that allowlist.
-Party Highlight and RankUp are outside the legacy allowlist; use CurseForge.
-Validate the manifest and unpacked checksums with updater.validate_manifest
-and updater.unpack_verified before publishing. Do not include any WTF data,
-account settings, junctions, credentials, or personal profile seeds.
+The current feed contains only MobCount, Party XP, and Tooltip Mover.
+Never package the retired DWD Profiles, Early Loader, or recovery helper.
+The source allowlist excludes them, and all historical public feeds and ZIPs
+have been cleaned. Existing binaries also accept the smaller supported subset.
 
-The full pack uses unmodified CurseForge archives. CURSEFORGE-PROJECTS.json
-records their source URLs, archive checksums, folders, and per-file checksums.
+Build feeds from supported addon folders using build_feed.py. Verify manifest
+checksums and exact ZIP membership before publishing. Do not include saved
+settings, WTF, account data, private profile seeds, or filesystem junctions.
+The full pack provenance is recorded in CURSEFORGE-PROJECTS.json.

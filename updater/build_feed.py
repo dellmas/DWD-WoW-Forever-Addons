@@ -6,7 +6,9 @@ from updater import ALLOWED,validate_manifest,reparse
 def build(addons,output,release):
     addons=Path(addons).resolve();output=Path(output).resolve();output.mkdir(parents=True,exist_ok=True)
     contents={}
-    for name in sorted(ALLOWED):
+    names=sorted(name for name in ALLOWED if (addons/name).is_dir())
+    if not names:raise ValueError('No supported DWD addons found')
+    for name in names:
         folder=addons/name
         if not folder.is_dir() or reparse(folder):raise ValueError('Missing or linked addon: '+name)
         for base,dirs,files in os.walk(folder,followlinks=False):
@@ -18,7 +20,7 @@ def build(addons,output,release):
     archive=output/'DWD-Only-Addons.zip'
     with zipfile.ZipFile(archive,'w',compression=zipfile.ZIP_DEFLATED) as z:
         for name,data in sorted(contents.items()):z.writestr(name,data)
-    manifest={'schema':1,'game':'forever','interface':16001,'release':release,'addons':sorted(ALLOWED),
+    manifest={'schema':1,'game':'forever','interface':16001,'release':release,'addons':names,
       'sha256':hashlib.sha256(archive.read_bytes()).hexdigest(),
       'files':{n:hashlib.sha256(d).hexdigest() for n,d in contents.items()}}
     validate_manifest(manifest)

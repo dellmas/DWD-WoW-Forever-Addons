@@ -1,10 +1,10 @@
 {
-  "pack_version": "v1.0.8",
+  "pack_version": "v1.0.9",
   "game": "WoW Forever",
   "game_version": "1.60.1",
   "interface": 16001,
-  "addon_folders": 27,
-  "curseforge_projects": 21,
+  "addon_folders": 25,
+  "curseforge_projects": 20,
   "projects": [
     {
       "name": "BagBrother",
@@ -727,27 +727,6 @@
         "DWD_PartyHighlight-Forever/Media/icon.tga": "065e5012b858c605d3b19fa4bd3d094245b04e560c859bb3f157377f4c49b68c",
         "DWD_PartyHighlight-Forever/Options.lua": "991b8f8bcffe18938e77b8678681d21134f9dfd3d07b53d58704025a2ffb7cb0",
         "DWD_PartyHighlight-Forever/README.txt": "7246bd676a005c82c09f9b6982f317ebc3e01de1645bd978f6f78ceaa3fb5626"
-      }
-    },
-    {
-      "name": "DWD Profiles",
-      "project_id": 1786247,
-      "file_id": 9483550,
-      "filename": "DWD-Profiles-1.0.30-forever.zip",
-      "download_url": "https://edge.forgecdn.net/files/9483/550/DWD-Profiles-1.0.30-forever.zip",
-      "sha256": "12a54ce125ece971e4d2aa6316b15f5f36c907cdf809d6956d2cb354028e9808",
-      "folders": [
-        "!DWD_Profiles_Loader",
-        "DWD_Profiles"
-      ],
-      "files": {
-        "!DWD_Profiles_Loader/!DWD_Profiles_Loader.toc": "6417bd8d6a159ac226b30d2bf9bc2dcb6d6975858f062112ce792f1d57cfb885",
-        "!DWD_Profiles_Loader/DWD_Profiles_EarlyLoader.lua": "634907c6d6b557823aa96ee31980cf2b63360e11a9bcf10759f7c00dd4fe86a2",
-        "!DWD_Profiles_Loader/ForeverIdentity.lua": "7f7b1cd22456e2d853171f5d7884a18a4ea50976815d24e7a81cdfdc973f512f",
-        "!DWD_Profiles_Loader/PortableProfileStore.lua": "eb2479c5737444effd307fe20361e5c2ef56fbce25fc8a92b1daf97cd16c8a65",
-        "DWD_Profiles/DWD_Profiles.lua": "733d3cb1623ca832ae97dd3d905b29a0a056f3694c6c92eb3908a253a5e97061",
-        "DWD_Profiles/DWD_Profiles.toc": "eaec222de45544436f4be15b8b339b4b61304cf37ca0958aa12e27deba6057b8",
-        "DWD_Profiles/ForeverIdentity.lua": "7f7b1cd22456e2d853171f5d7884a18a4ea50976815d24e7a81cdfdc973f512f"
       }
     },
     {

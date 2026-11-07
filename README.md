@@ -1,9 +1,9 @@
 # WoW Forever Addon Pack
 
 A CurseForge-recognized addon pack for **World of Warcraft: Forever 1.60.1**
-(interface 16001). Version **v1.0.8** contains **27 addon folders from 21
+(interface 16001). Version **v1.0.9** contains **25 addon folders from 20
 CurseForge projects**, including official Bartender4, Questie, QuestieDB, and
-all six DWD addons. Bundled modules appear under their parent project.
+all five DWD addons. Bundled modules appear under their parent project.
 
 **[Download the addon ZIP](https://github.com/dellmas/DWD-WoW-Forever-Addons/releases/latest/download/DWD-Forever-Addons.zip)**
 
@@ -14,6 +14,17 @@ all six DWD addons. Bundled modules appear under their parent project.
 
 The download is public and requires no GitHub account. Download the release
 ZIP above; GitHub's automatic Source code archives do not contain the pack.
+
+## Profile addons removed
+
+DWD Profiles and its Early Loader are retired and are no longer included.
+Remove `DWD_Profiles` and `!DWD_Profiles_Loader` from your `Interface/AddOns`
+folder if you previously installed them. Also remove the obsolete
+`DWD_Profiles_Recovery` helper if present. Leave `WTF` intact: your normal
+addon settings and inactive saved profile data are retained.
+
+The previous public ZIP downloads and legacy updater feeds have also had
+these addons removed. Each remaining addon saves its own settings.
 
 ## Current fix: warrior and paged action bars
 
@@ -48,21 +59,13 @@ requires loading the update and checking the visible result.
    migration before switching. Never enable both Bartender copies.
 4. In CurseForge, select **World of Warcraft > Forever**, then open the
    three-dot menu beside Run Game and choose **Scan addons folder > Scan**.
-5. Check **My Addons**. This collection was recognized as 21 projects on the
-   source installation. Approval/indexing can affect detection elsewhere;
+5. Check **My Addons**. The included folders are supplied by 20 CurseForge projects. Approval/indexing can affect detection elsewhere;
    refresh or rescan after processing completes.
 
 The addon files are unchanged copies of their CurseForge release archives.
 Original author and license notices are retained. The version and provenance
 manifests identify every packaged file; no local compatibility patches are
 applied to third-party addons.
-
-## Previous fix: TomTom profile restores
-
-DWD Profiles 1.0.30 and early loader 1.0.8 preserve TomTom's initialized
-defaults when restoring sparse saved layouts. This prevents the missing
-coordinate-block update interval from causing errors every frame. TomTom's
-files and personal saved settings are unchanged. Reload after updating.
 
 ## Settings
 
@@ -76,11 +79,10 @@ This download does not migrate layouts from the old beta Bartender database.
 - DWD Mob Kill Counter: unit-tooltip kill counts, including the aura-taint fix.
 - Party XP Bars: party XP exchange and sync diagnostics.
 - DWD Tooltip Mover: configurable tooltip positioning.
-- DWD Profiles and its bundled early loader: save and restore your own layouts.
 - DWD Party Highlight: party target and friendly nameplate decorations.
 - DWD RankUp: rank upgrades and newly learned active abilities on action slots.
 
-Use `/dwdpro`, `/dwdxp`, `/dwdmc`, `/ttmove`, and `/dwdrank` for help.
+Use `/dwdxp`, `/dwdmc`, `/ttmove`, and `/dwdrank` for help.
 Enable both Questie and QuestieDB. Restart or reload WoW after an update as
 required; a reload cannot discover a newly installed addon folder.
 

@@ -7,8 +7,7 @@ import shutil, subprocess, sys, threading, time, urllib.parse, urllib.request, z
 VERSION = '1.0.1'
 REPOSITORY = 'dellmas/DWD-WoW-Forever-Addons'
 API_URL = 'https://api.github.com/repos/' + REPOSITORY + '/releases/latest'
-ALLOWED = frozenset(('!DWD_Profiles_Loader','DWD_Profiles','DWD_Profiles_Recovery',
-    'DWD_MobCount','DWD_PartyXP_Forever','DWD_TooltipMover','DWD_UpdaterStatus'))
+ALLOWED = frozenset(('DWD_MobCount','DWD_PartyXP_Forever','DWD_TooltipMover','DWD_UpdaterStatus'))
 DATA = Path(os.environ.get('LOCALAPPDATA', Path.home())) / 'DWDAddonUpdater'
 STARTUP_NAME = 'DWD Addon Updater.lnk'
 CHECK_INTERVAL = 30 * 60
