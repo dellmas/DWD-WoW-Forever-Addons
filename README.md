@@ -1,7 +1,9 @@
-# WoW Forever Addon Pack
+# DWD WoW Forever Addon Pack
+
+![Dog Water Development](branding/DogWater.jpg)
 
 A CurseForge-recognized addon pack for **World of Warcraft: Forever 1.60.1**
-(interface 16001). Version **v1.0.12** contains **26 addon folders from 21
+(interface 16001). Version **v1.0.13** contains **26 addon folders from 21
 CurseForge projects**, including official Bartender4, Questie, QuestieDB, and
 all six DWD addons. Bundled modules appear under their parent project.
 
@@ -26,7 +28,19 @@ addon settings and inactive saved profile data are retained.
 The previous public ZIP downloads and legacy updater feeds have also had
 these addons removed. Each remaining addon saves its own settings.
 
-## New: Bagnon inventory stays open
+## Consistent DWD names and logo
+
+All six DWD addons now use the same Dog Water Development logo and consistent
+`DWD`-prefixed display names. Party XP is **DWD Party XP**, with Bars removed.
+CurseForge project names/logos and the in-game addon-list metadata match.
+New branding files have been submitted; moderation or app caching may delay
+the update on another installation. Reload/restart WoW to refresh metadata.
+
+Folder names, project IDs, saved-variable contracts, Lua code and existing
+resources remain unchanged. The same logo is included in each addon, with no
+new cross-addon dependency. See [branding standards](BRANDING.md).
+
+## Previous addition: Bagnon inventory stays open
 
 DWD Bagnon Helper - Forever 1.0.0-forever.1 keeps Bagnon inventory open until
 you click its close X. Map maximization, Escape, bag toggles, and interaction
@@ -130,7 +144,7 @@ This download does not migrate layouts from the old beta Bartender database.
 
 - DWD Bagnon Helper: inventory closes only when its X is clicked.
 - DWD Mob Kill Counter: unit-tooltip kill counts, including the aura-taint fix.
-- Party XP Bars: party XP exchange and sync diagnostics.
+- DWD Party XP: party XP exchange and sync diagnostics.
 - DWD Tooltip Mover: configurable tooltip positioning.
 - DWD Party Highlight: party target and friendly nameplate decorations.
 - DWD RankUp: rank upgrades and newly learned active abilities on action slots.

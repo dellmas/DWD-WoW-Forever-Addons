@@ -1,10 +1,11 @@
+## IconTexture: Interface\AddOns\DWD_RankUp-Forever\DWDLogo
 ## Interface: 16001
 ## LoadSavedVariablesFirst: 1
 ## AllowLoadGameType: camelot, forever
-## Title: DWD RankUp - Forever
+## Title: DWD RankUp
 ## Notes: Upgrades spell ranks on action bars and optionally adds newly learned active abilities to empty slots.
 ## Author: dellmas
-## Version: 1.3.0-forever.2
+## Version: 1.3.0-forever.3
 ## X-Curse-Project-ID: 1786376
 ## SavedVariables: DWD_RankUpForeverStore
 

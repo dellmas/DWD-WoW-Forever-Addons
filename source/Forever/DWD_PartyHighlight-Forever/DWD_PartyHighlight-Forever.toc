@@ -1,0 +1,14 @@
+## IconTexture: Interface\AddOns\DWD_PartyHighlight-Forever\DWDLogo
+## Interface: 16001
+## LoadSavedVariablesFirst: 1
+## AllowLoadGameType: camelot, forever
+## Title: DWD Party Highlight
+## Notes: Party target markers and optional decorations and labels around party members' nameplates.
+## Author: dellmas
+## X-Curse-Project-ID: 1786283
+## Version: 2.0.0-forever.2
+## SavedVariables: DWD_PartyHighlightForeverDB
+## OptionalDeps: Plater
+
+Core.lua
+Options.lua

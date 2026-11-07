@@ -1,4 +1,4 @@
-WoW Forever Addon Pack v1.0.12
+WoW Forever Addon Pack v1.0.13
 Updated November 6, 2026: the DWD Profiles addons have been removed.
 This archive contains 26 addon folders. Use the latest release for current versions.
 
@@ -35,3 +35,9 @@ shows status. Disable the helper and reload to restore normal closing. No
 Bagnon files or settings are modified. New CurseForge project approval and
 indexing are pending. The legacy desktop updater does not install this helper;
 use the full ZIP or CurseForge.
+
+Branding release: all six published DWD addons use the same Dog Water logo
+and DWD-prefixed display names. Party XP is named DWD Party XP. Addon folder
+names, CurseForge project IDs, Lua code and settings are unchanged. Reload or
+restart WoW to refresh addon-list metadata. CurseForge app names/logos can
+lag until moderation, refresh or app restart.

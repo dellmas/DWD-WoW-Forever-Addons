@@ -1,10 +1,11 @@
+## IconTexture: Interface\AddOns\DWD_BagnonHelper-Forever\DWDLogo
 ## X-Curse-Project-ID: 1788396
 ## Interface: 16001
 ## AllowLoadGameType: camelot, forever
-## Title: DWD Bagnon Helper - Forever
+## Title: DWD Bagnon Helper
 ## Notes: Keeps Bagnon's inventory open until its close X is clicked.
 ## Author: dellmas
-## Version: 1.0.0-forever.1
+## Version: 1.0.0-forever.2
 ## Dependencies: Bagnon
 ## Category: Bags & Inventory
 

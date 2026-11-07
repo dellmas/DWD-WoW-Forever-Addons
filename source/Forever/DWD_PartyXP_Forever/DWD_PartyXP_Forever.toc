@@ -1,0 +1,14 @@
+## IconTexture: Interface\AddOns\DWD_PartyXP_Forever\DWDLogo
+## X-Curse-Project-ID: 1338949
+## Interface: 16001
+## LoadSavedVariablesFirst: 1
+## AllowLoadGameType: camelot, forever
+## Title: DWD Party XP
+## Notes: Floating HUD for player, party, and pet XP in WoW Forever. Auto-syncs through the add-on channel.
+## Author: dellmas
+## Version: 1.4.13-forever
+## SavedVariables: DWD_PartyXP_Forever_Store, DWD_PartyXP_Forever_DB
+## SavedVariablesPerCharacter: DWD_PartyXP_Forever_CharacterDB
+
+ForeverIdentity.lua
+DWD_PartyXP_Forever.lua

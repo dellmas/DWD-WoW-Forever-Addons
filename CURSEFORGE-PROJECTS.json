@@ -1,5 +1,5 @@
 {
-  "pack_version": "v1.0.12",
+  "pack_version": "v1.0.13",
   "game": "WoW Forever",
   "game_version": "1.60.1",
   "interface": 16001,
@@ -692,32 +692,34 @@
     {
       "name": "DWD Bagnon Helper",
       "project_id": 1788396,
-      "file_id": 9485177,
-      "filename": "DWD-BagnonHelper-1.0.0-forever.1.zip",
-      "download_url": "https://edge.forgecdn.net/files/9485/177/DWD-BagnonHelper-1.0.0-forever.1.zip",
-      "sha256": "527bae0c3993710dbbb9d41fc46147ab6b92902a265ded0f6ffe600551be5475",
+      "file_id": 9491701,
+      "filename": "DWD-BagnonHelper-1.0.0-forever.2.zip",
+      "download_url": "https://edge.forgecdn.net/files/9491/701/DWD-BagnonHelper-1.0.0-forever.2.zip",
+      "sha256": "d18d17e995b781de376ea1b75c2618c895e42fbff167c91c506326e480ab5729",
       "folders": [
         "DWD_BagnonHelper-Forever"
       ],
       "files": {
         "DWD_BagnonHelper-Forever/Core.lua": "e6b68f80882ec0573ccfa1eb3489698659dc688671ff8e43b19f22a338bd3c5c",
-        "DWD_BagnonHelper-Forever/DWD_BagnonHelper-Forever.toc": "68090015bb655a8c8a49dbd71b1a958030d122c909e624b9b09b8ffc9e73cf70",
+        "DWD_BagnonHelper-Forever/DWDLogo.tga": "f6061afa84fef87aabe50a55eabf4f5efa303919decdec3fab8b83299bf9c5de",
+        "DWD_BagnonHelper-Forever/DWD_BagnonHelper-Forever.toc": "9aa3c3bbeba5d468043cf15f051427996daadf5f385f6c019497709ceac2fda5",
         "DWD_BagnonHelper-Forever/README.txt": "90b07979dd5855bc9604c2f6313e370cce002873824cd1e8c15e8dc99e6d4285"
       }
     },
     {
       "name": "DWD Mob Kill Counter",
       "project_id": 1338907,
-      "file_id": 9484907,
-      "filename": "DWD-MobCount-0.0.1-forever.23.zip",
-      "download_url": "https://edge.forgecdn.net/files/9484/907/DWD-MobCount-0.0.1-forever.23.zip",
-      "sha256": "352bda753a0525db0e2138fc43552507fd25bb227ea1c109831de2c75909c215",
+      "file_id": 9491689,
+      "filename": "DWD-MobKillCounter-0.0.1-forever.24.zip",
+      "download_url": "https://edge.forgecdn.net/files/9491/689/DWD-MobKillCounter-0.0.1-forever.24.zip",
+      "sha256": "ed0fb0b35c7ff640a166aef46f9b3115c12c6a5e3ebd5dedf3a10ef22b080dae",
       "folders": [
         "DWD_MobCount"
       ],
       "files": {
+        "DWD_MobCount/DWDLogo.tga": "f6061afa84fef87aabe50a55eabf4f5efa303919decdec3fab8b83299bf9c5de",
         "DWD_MobCount/DWD_MobCount.lua": "7bef32fcd6e32af99e41f863f1ed9e73d00901966abf3b034df067208e3dd593",
-        "DWD_MobCount/DWD_MobCount.toc": "d21e9da220ee1cc8b088edb85daab20804feaee9d2f293ec8015a21c1218e049",
+        "DWD_MobCount/DWD_MobCount.toc": "8b2d83bd339103f15cb1d8a71f8115bbaf51f22542660186a977ad4ffec0f002",
         "DWD_MobCount/DWD_MobCount_ConfigUI.lua": "4116d982af3b0c36d862c9dec41866ed5aec31db48397d4ce119027840a87b16",
         "DWD_MobCount/ForeverIdentity.lua": "7f7b1cd22456e2d853171f5d7884a18a4ea50976815d24e7a81cdfdc973f512f"
       }
@@ -725,16 +727,17 @@
     {
       "name": "DWD Party Highlight",
       "project_id": 1786283,
-      "file_id": 9468042,
-      "filename": "DWD_PartyHighlight-Forever-2.0.0-forever.1.zip",
-      "download_url": "https://edge.forgecdn.net/files/9468/42/DWD_PartyHighlight-Forever-2.0.0-forever.1.zip",
-      "sha256": "fc56adbb0e4303022f8734192d14427db28fd70c5ce93a338a1e9f84898b2622",
+      "file_id": 9491694,
+      "filename": "DWD-PartyHighlight-2.0.0-forever.2.zip",
+      "download_url": "https://edge.forgecdn.net/files/9491/694/DWD-PartyHighlight-2.0.0-forever.2.zip",
+      "sha256": "90a98bab0b63d0883fc815e40b6a081e5c125065e8967afb23e2de29b2cb6514",
       "folders": [
         "DWD_PartyHighlight-Forever"
       ],
       "files": {
         "DWD_PartyHighlight-Forever/Core.lua": "c44da83a976d1c58f22053108da884caeff78686fd8a0908d243e8ce7ea47f6d",
-        "DWD_PartyHighlight-Forever/DWD_PartyHighlight-Forever.toc": "af5f8ed358a0255d346e1c1d1f92a3d11bd1ee533a4c98b7d147a1af3e5acd27",
+        "DWD_PartyHighlight-Forever/DWDLogo.tga": "f6061afa84fef87aabe50a55eabf4f5efa303919decdec3fab8b83299bf9c5de",
+        "DWD_PartyHighlight-Forever/DWD_PartyHighlight-Forever.toc": "f6c9df99537f5806cc62d2e0679799edb0bcb4138904d69915dc43e3db2e4cb4",
         "DWD_PartyHighlight-Forever/Media/arrow_chevron.tga": "63c7ff887b10556c8e0b93b2004952fee4ff7955e1293232386f7fbb289eaf99",
         "DWD_PartyHighlight-Forever/Media/arrow_diamond.tga": "e0d0b13495c0fcb96f07dab4f5c1a07086dd901373e132c22d131a9212d48405",
         "DWD_PartyHighlight-Forever/Media/arrow_neon.tga": "d4d0244f4ce9c2e8be9ec89d8acaddfebdbba9d397ac0fbc8445632dbb09b36c",
@@ -746,18 +749,38 @@
       }
     },
     {
+      "name": "DWD Party XP",
+      "project_id": 1338949,
+      "file_id": 9491699,
+      "filename": "DWD-PartyXP-1.4.13-forever.zip",
+      "download_url": "https://edge.forgecdn.net/files/9491/699/DWD-PartyXP-1.4.13-forever.zip",
+      "sha256": "695979103eaaf696f076dc8ba7145575d2a3c5a08d70db2c8c967727511fd1fc",
+      "folders": [
+        "DWD_PartyXP_Forever"
+      ],
+      "files": {
+        "DWD_PartyXP_Forever/DWDLogo.tga": "f6061afa84fef87aabe50a55eabf4f5efa303919decdec3fab8b83299bf9c5de",
+        "DWD_PartyXP_Forever/DWD_PartyXP_Forever.lua": "ef4d10d02134fcbcb0acb1f006f9918bb0f813350cfbac66294e2a9708b70e4a",
+        "DWD_PartyXP_Forever/DWD_PartyXP_Forever.toc": "e39fa9d35797665c3544e1bf243126a719b53b1145ead2ffbc40a33da66dc71e",
+        "DWD_PartyXP_Forever/ForeverIdentity.lua": "7f7b1cd22456e2d853171f5d7884a18a4ea50976815d24e7a81cdfdc973f512f",
+        "DWD_PartyXP_Forever/media/icon.tga": "065e5012b858c605d3b19fa4bd3d094245b04e560c859bb3f157377f4c49b68c",
+        "DWD_PartyXP_Forever/media/s-growl.mp3": "7b3591007a30bd557417929f142b2ffa33c82977c31192fcfb253fbcb8cebbee"
+      }
+    },
+    {
       "name": "DWD RankUp",
       "project_id": 1786376,
-      "file_id": 9483878,
-      "filename": "DWD_RankUp-Forever-1.3.0-forever.2.zip",
-      "download_url": "https://edge.forgecdn.net/files/9483/878/DWD_RankUp-Forever-1.3.0-forever.2.zip",
-      "sha256": "e6ed4f5f042e7baf4346956877ba2fced965043f6f8e41d954289bd512b45d34",
+      "file_id": 9491695,
+      "filename": "DWD-RankUp-1.3.0-forever.3.zip",
+      "download_url": "https://edge.forgecdn.net/files/9491/695/DWD-RankUp-1.3.0-forever.3.zip",
+      "sha256": "45766d847448f10e8e9b6d1aa76da8bedc4a6f4960863f7e01aa2b0ea0905bb5",
       "folders": [
         "DWD_RankUp-Forever"
       ],
       "files": {
+        "DWD_RankUp-Forever/DWDLogo.tga": "f6061afa84fef87aabe50a55eabf4f5efa303919decdec3fab8b83299bf9c5de",
         "DWD_RankUp-Forever/DWD_RankUp-Forever.lua": "7cebb2eb5a1a1cd3b659f63399a47b411c86639468bace940d29bc0168b95f48",
-        "DWD_RankUp-Forever/DWD_RankUp-Forever.toc": "0c307aef5373e944dcdacb584b58708e5ff58f486dfe862c8bb5cc41701b755e",
+        "DWD_RankUp-Forever/DWD_RankUp-Forever.toc": "cbb4b61e3c9080cc949a0a0c6d96dc23354aca2bde26eaca6015a9471a153f27",
         "DWD_RankUp-Forever/ForeverIdentity.lua": "7f7b1cd22456e2d853171f5d7884a18a4ea50976815d24e7a81cdfdc973f512f",
         "DWD_RankUp-Forever/README.txt": "a382c792d831b4e8cabef88cc6195365f1fdc964754d5a2922d880413d67dbbe"
       }
@@ -765,16 +788,17 @@
     {
       "name": "DWD Tooltip Mover",
       "project_id": 1342218,
-      "file_id": 9484747,
-      "filename": "DWD-TooltipMover-1.1.0-forever.9.zip",
-      "download_url": "https://edge.forgecdn.net/files/9484/747/DWD-TooltipMover-1.1.0-forever.9.zip",
-      "sha256": "d2f9fa88ade98fd6e121670895fbf93a6c462a3585edc2605acfcada10f38c0a",
+      "file_id": 9491696,
+      "filename": "DWD-TooltipMover-1.1.0-forever.10.zip",
+      "download_url": "https://edge.forgecdn.net/files/9491/696/DWD-TooltipMover-1.1.0-forever.10.zip",
+      "sha256": "2f11b31ddc97cc24070b1e2d86be0b550d8d08554eac9b14515c10f273d84361",
       "folders": [
         "DWD_TooltipMover"
       ],
       "files": {
+        "DWD_TooltipMover/DWDLogo.tga": "f6061afa84fef87aabe50a55eabf4f5efa303919decdec3fab8b83299bf9c5de",
         "DWD_TooltipMover/DWD_TooltipMover.lua": "d1276d970c23be8b56c53974916c521d170be55dbb6a965ba160c9950d0ddfde",
-        "DWD_TooltipMover/DWD_TooltipMover.toc": "dad2caa5b13a1ce49944ab467634d3e8f83c2a16bddfb47a0c402384106b8ac5",
+        "DWD_TooltipMover/DWD_TooltipMover.toc": "3e97ab6f719b974ff37011457e0bc4d51bcf1f90d519a521d69404f22983feb4",
         "DWD_TooltipMover/ForeverIdentity.lua": "7f7b1cd22456e2d853171f5d7884a18a4ea50976815d24e7a81cdfdc973f512f"
       }
     },
@@ -853,24 +877,6 @@
         "Leatrix_Sounds/Leatrix_Sounds_Kits.lua": "75844a229631b49a00533ccb5e0b8a0c89528df83646dee0409f9dd4477e6f8c",
         "Leatrix_Sounds/Leatrix_Sounds.xml": "53f5137654c3d782600c79aa609d0ac577495c9cf29e57b103c29f53e792e4cc",
         "Leatrix_Sounds/Leatrix_Sounds_Locale.lua": "e8d7ad3fd5a898352b4e13884986c2f38df2a9b37e4ef8e8e99ab704634d1d4d"
-      }
-    },
-    {
-      "name": "Party XP Bars",
-      "project_id": 1338949,
-      "file_id": 9467771,
-      "filename": "DWD-PartyXP-1.4.12-forever.zip",
-      "download_url": "https://edge.forgecdn.net/files/9467/771/DWD-PartyXP-1.4.12-forever.zip",
-      "sha256": "8273be4c9848f0d5ee4713c8302d002b0a4918453c8a26bf10bdaf82a0b630b8",
-      "folders": [
-        "DWD_PartyXP_Forever"
-      ],
-      "files": {
-        "DWD_PartyXP_Forever/DWD_PartyXP_Forever.lua": "ef4d10d02134fcbcb0acb1f006f9918bb0f813350cfbac66294e2a9708b70e4a",
-        "DWD_PartyXP_Forever/DWD_PartyXP_Forever.toc": "c9c80fde5446671ea2d44fbe290b82f1e506de59918b8926ddb3f68038be01dc",
-        "DWD_PartyXP_Forever/ForeverIdentity.lua": "7f7b1cd22456e2d853171f5d7884a18a4ea50976815d24e7a81cdfdc973f512f",
-        "DWD_PartyXP_Forever/media/icon.tga": "065e5012b858c605d3b19fa4bd3d094245b04e560c859bb3f157377f4c49b68c",
-        "DWD_PartyXP_Forever/media/s-growl.mp3": "7b3591007a30bd557417929f142b2ffa33c82977c31192fcfb253fbcb8cebbee"
       }
     },
     {

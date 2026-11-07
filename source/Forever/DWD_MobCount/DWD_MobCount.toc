@@ -1,11 +1,12 @@
+## IconTexture: Interface\AddOns\DWD_MobCount\DWDLogo
 ## X-Curse-Project-ID: 1338907
 ## Interface: 16001
 ## LoadSavedVariablesFirst: 1
 ## AllowLoadGameType: camelot, forever
-## Title: DWD MobCount
+## Title: DWD Mob Kill Counter
 ## Notes: Shows per-NPC kill count on unit tooltips; includes list & options.
 ## Author: dellmas
-## Version: 0.0.1-forever.23
+## Version: 0.0.1-forever.24
 ## SavedVariables: DWD_MobCountDB, DWD_MobCountBackup, DWD_MobCountLastClear, DWD_MobCountConfig, DWD_MobCountConfigByCharacter
 
 ForeverIdentity.lua
