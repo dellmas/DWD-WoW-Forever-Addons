@@ -1,0 +1,13 @@
+## X-Curse-Project-ID: 1342218
+## Interface: 16001
+## LoadSavedVariablesFirst: 1
+## AllowLoadGameType: camelot, forever
+## Title: DWD Tooltip Mover
+## Notes: Move, scale, and restyle the default tooltip. Now with a tiny GUI.
+## Author: dellmas
+## Version: 1.1.0-forever.9
+## SavedVariables: DWD_TooltipMoverForeverStore, DWD_TooltipMoverDB
+## SavedVariablesPerCharacter: DWD_TooltipMoverCharacterDB
+
+ForeverIdentity.lua
+DWD_TooltipMover.lua

@@ -1,7 +1,7 @@
 # WoW Forever Addon Pack
 
 A CurseForge-recognized addon pack for **World of Warcraft: Forever 1.60.1**
-(interface 16001). Version **v1.0.9** contains **25 addon folders from 20
+(interface 16001). Version **v1.0.10** contains **25 addon folders from 20
 CurseForge projects**, including official Bartender4, Questie, QuestieDB, and
 all five DWD addons. Bundled modules appear under their parent project.
 
@@ -26,7 +26,21 @@ addon settings and inactive saved profile data are retained.
 The previous public ZIP downloads and legacy updater feeds have also had
 these addons removed. Each remaining addon saves its own settings.
 
-## Current fix: warrior and paged action bars
+## Current fix: Tooltip Mover scale and config
+
+Tooltip Mover 1.1.0-forever.9 preserves the tooltip's screen anchor when changing
+scale. Its config panel displays the current scale, font size, and selected
+font immediately. The quest-progress move button has its own row below the
+font dropdown. Opening config does not overwrite saved settings.
+
+After updating, run `/reload` and `/ttmove config`. Eleven Lua 5.1 regression
+checks passed, including scaled UI geometry, cursor anchoring, first-open
+values, and layout spacing. The live UI still needs an in-game check.
+The new CurseForge file may need approval/indexing before the app offers it.
+
+[Tooltip Mover source](source/Forever/DWD_TooltipMover)
+
+## Previous fix: warrior and paged action bars
 
 RankUp 1.3.0-forever.2 places newly learned abilities on empty visible buttons,
 following the actual Bartender/Blizzard stance or bar page. Success messages
