@@ -1,0 +1,7 @@
+## Interface: 11507
+## Title: DWD RankUp — Auto-Upgrade Spell Ranks
+## Notes: Upgrades lower ranks on your bars and (optionally) places newly learned abilities in the next free slot.
+## Author: dellmas
+## Version: 1.2.0
+## SavedVariablesPerCharacter: DWD_RankUpDB
+DWD_RankUp.lua

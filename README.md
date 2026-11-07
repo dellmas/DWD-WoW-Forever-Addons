@@ -1,7 +1,7 @@
 # WoW Forever Addon Pack
 
 A CurseForge-recognized addon pack for **World of Warcraft: Forever 1.60.1**
-(interface 16001). Version **v1.0.7** contains **27 addon folders from 21
+(interface 16001). Version **v1.0.8** contains **27 addon folders from 21
 CurseForge projects**, including official Bartender4, Questie, QuestieDB, and
 all six DWD addons. Bundled modules appear under their parent project.
 
@@ -14,6 +14,27 @@ all six DWD addons. Bundled modules appear under their parent project.
 
 The download is public and requires no GitHub account. Download the release
 ZIP above; GitHub's automatic Source code archives do not contain the pack.
+
+## Current fix: warrior and paged action bars
+
+RankUp 1.3.0-forever.2 places newly learned abilities on empty visible buttons,
+following the actual Bartender/Blizzard stance or bar page. Success messages
+identify the visible destination; hidden raw slot numbers are no longer the
+default. Existing explicit raw-slot ranges remain available as an option.
+
+To recover an already learned Battle Shout placed on a hidden page, run these
+commands separately. Existing hidden copies and other bar contents remain:
+
+```text
+/reload
+/dwdrank place Battle Shout
+```
+
+Use `/dwdrank visible` to restore visible-button placement after setting a custom
+slot range. Forty regression tests passed, including warrior stance paging,
+combat/cursor deferral, native bars, the current Bartender `GetAction` method,
+and detecting a page change during placement. Actual in-game placement still
+requires loading the update and checking the visible result.
 
 ## Let CurseForge monitor updates
 
@@ -36,7 +57,7 @@ Original author and license notices are retained. The version and provenance
 manifests identify every packaged file; no local compatibility patches are
 applied to third-party addons.
 
-## Current fix: TomTom profile restores
+## Previous fix: TomTom profile restores
 
 DWD Profiles 1.0.30 and early loader 1.0.8 preserve TomTom's initialized
 defaults when restoring sparse saved layouts. This prevents the missing
@@ -72,3 +93,14 @@ same folders. Disabling startup retains addon settings and backups.
 The legacy source and compatibility release assets remain available for
 existing installations. That updater has a fixed allowlist and does not manage
 all addons in this pack. See [legacy updater notes](updater/README.txt).
+
+## RankUp source
+
+DWD RankUp is maintained by dellmas. The Forever port adapts the author's
+original Classic Era DWD_RankUp 1.2.0 addon.
+
+- [Original Classic Era source](source/ClassicEra/DWD_RankUp)
+- [Current Forever source](source/Forever/DWD_RankUp-Forever)
+
+The original Classic Era installation is preserved. These source directories
+are for browsing; install the release ZIP for the complete pack.

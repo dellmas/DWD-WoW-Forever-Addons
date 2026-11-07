@@ -1,5 +1,5 @@
 {
-  "pack_version": "v1.0.7",
+  "pack_version": "v1.0.8",
   "game": "WoW Forever",
   "game_version": "1.60.1",
   "interface": 16001,
@@ -753,18 +753,18 @@
     {
       "name": "DWD RankUp",
       "project_id": 1786376,
-      "file_id": 9468600,
-      "filename": "DWD_RankUp-Forever-1.3.0-forever.1.zip",
-      "download_url": "https://edge.forgecdn.net/files/9468/600/DWD_RankUp-Forever-1.3.0-forever.1.zip",
-      "sha256": "087fd87a4427737212c7d7c6d0e46e76f82add360c656d2c7bd4a90fff1a3400",
+      "file_id": 9483878,
+      "filename": "DWD_RankUp-Forever-1.3.0-forever.2.zip",
+      "download_url": "https://edge.forgecdn.net/files/9483/878/DWD_RankUp-Forever-1.3.0-forever.2.zip",
+      "sha256": "e6ed4f5f042e7baf4346956877ba2fced965043f6f8e41d954289bd512b45d34",
       "folders": [
         "DWD_RankUp-Forever"
       ],
       "files": {
-        "DWD_RankUp-Forever/DWD_RankUp-Forever.lua": "1bfc8a8f73d86a3b534fa6869c22e05f1209b10a87ecd2c417dcfcf523a9c388",
-        "DWD_RankUp-Forever/DWD_RankUp-Forever.toc": "478862f731546ce7bd38235123dea1a49fde22f8a8750bdf6e29cc9cba75294c",
+        "DWD_RankUp-Forever/DWD_RankUp-Forever.lua": "7cebb2eb5a1a1cd3b659f63399a47b411c86639468bace940d29bc0168b95f48",
+        "DWD_RankUp-Forever/DWD_RankUp-Forever.toc": "0c307aef5373e944dcdacb584b58708e5ff58f486dfe862c8bb5cc41701b755e",
         "DWD_RankUp-Forever/ForeverIdentity.lua": "7f7b1cd22456e2d853171f5d7884a18a4ea50976815d24e7a81cdfdc973f512f",
-        "DWD_RankUp-Forever/README.txt": "ed971dc74fcf5c4b54754a9e2725be32ecc69ea59f7577bb5cccdc06b5616c3c"
+        "DWD_RankUp-Forever/README.txt": "a382c792d831b4e8cabef88cc6195365f1fdc964754d5a2922d880413d67dbbe"
       }
     },
     {
