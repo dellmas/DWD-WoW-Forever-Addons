@@ -1,5 +1,5 @@
 {
-  "pack_version": "v1.0.13",
+  "pack_version": "v1.0.14",
   "game": "WoW Forever",
   "game_version": "1.60.1",
   "interface": 16001,
@@ -709,17 +709,17 @@
     {
       "name": "DWD Mob Kill Counter",
       "project_id": 1338907,
-      "file_id": 9491689,
-      "filename": "DWD-MobKillCounter-0.0.1-forever.24.zip",
-      "download_url": "https://edge.forgecdn.net/files/9491/689/DWD-MobKillCounter-0.0.1-forever.24.zip",
-      "sha256": "ed0fb0b35c7ff640a166aef46f9b3115c12c6a5e3ebd5dedf3a10ef22b080dae",
+      "file_id": 9549583,
+      "filename": "DWD-MobKillCounter-0.0.1-forever.25.zip",
+      "download_url": "https://edge.forgecdn.net/files/9549/583/DWD-MobKillCounter-0.0.1-forever.25.zip",
+      "sha256": "6220f23c4ee6a41c75387bb7b2d40f3254b7f331c325fe4b1b0497e9e5246419",
       "folders": [
         "DWD_MobCount"
       ],
       "files": {
         "DWD_MobCount/DWDLogo.tga": "f6061afa84fef87aabe50a55eabf4f5efa303919decdec3fab8b83299bf9c5de",
-        "DWD_MobCount/DWD_MobCount.lua": "7bef32fcd6e32af99e41f863f1ed9e73d00901966abf3b034df067208e3dd593",
-        "DWD_MobCount/DWD_MobCount.toc": "8b2d83bd339103f15cb1d8a71f8115bbaf51f22542660186a977ad4ffec0f002",
+        "DWD_MobCount/DWD_MobCount.lua": "1f20a8eb3db5fdbb8cab0fb3e681b6fa19f57623be6fb960fdd8d0054e8643b5",
+        "DWD_MobCount/DWD_MobCount.toc": "5ac71be6fafcaa12f3eab31705ad76b1167a045e65a81269caaf3b611a9e8e8f",
         "DWD_MobCount/DWD_MobCount_ConfigUI.lua": "4116d982af3b0c36d862c9dec41866ed5aec31db48397d4ce119027840a87b16",
         "DWD_MobCount/ForeverIdentity.lua": "7f7b1cd22456e2d853171f5d7884a18a4ea50976815d24e7a81cdfdc973f512f"
       }

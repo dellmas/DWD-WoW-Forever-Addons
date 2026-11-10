@@ -1,4 +1,4 @@
--- DWD MobCount (Classic Era 1.15.7)
+-- DWD MobCount (WoW Forever)
 -- Counts your mob kills, shows total on unit tooltip, provides a simple list UI,
 -- and slash: /dwdmc list | config | debug | clear | restore | lock
 
@@ -85,22 +85,14 @@ repairSavedColor("valueColor", 1.00, 1.00, 1.00)
 
 -- ========================= State =========================
 local initialized, tooltipHooked = false, false
-local charKey, playerGUID, playerName, playerRealm, playerFullName
+local charKey
 local killsById, namesById, killsByName = {}, {}, {}
-local nameByGUID, taggedGUID, taggedName, counted, nameToRecentId = {}, {}, {}, {}, {}
-local recentTargets = {}
+local recentKills = {}
+local nextKillPrune = 0
 local listFrame
-local lastHostileGUID, lastHostileName
-local observedTarget
-local pendingKillCredits = 0
-local lastKillSignalAt = 0
 
 local ShowList
 local ClearCharacterData, RestoreData
-local creditKillById, creditKillByName
-local isMineSource
-local CreditObservedTarget
-local IsUnitDeadCompat
 
 -- ========================= Utils =========================
 local function trim(s) return (s and s:gsub("^%s+",""):gsub("%s+$","")) or "" end
@@ -184,15 +176,10 @@ local function persistCurrentCounts()
 end
 
 -- ========================= GUID helpers =========================
-local function noteNameId(name,id) if name and id then nameToRecentId[name]={ id=id, t=GetTime() } end end
-local function isCreatureGUID_dash(g) if type(g)~="string" then return false end return (g:find("^Creature%-") or g:find("^Vehicle%-"))~=nil end
-local function npcIdFromDashGUID(g)
-  local id = select(6, strsplit("-", g))
-  if not id then id = g:match("^Creature%-%d+%-%d+%-%d+%-%d+%-(%d+)") or g:match("^Vehicle%-%d+%-%d+%-%d+%-%d+%-(%d+)") end
-  return id and tonumber(id) or nil
+local function npcIdFromGUID(guid)
+  local kind, _, _, _, _, id = strsplit("-", guid)
+  if kind == "Creature" or kind == "Vehicle" then return tonumber(id) end
 end
-local function npcIdFromGUID(g) return isCreatureGUID_dash(g) and npcIdFromDashGUID(g) or nil end
-local function isCreatureGUID(g) return isCreatureGUID_dash(g) end
 
 -- ========================= Tooltip line (custom wording supported) =========================
 local STYLE_MAP = {
@@ -227,10 +214,17 @@ end
 _G.DWD_MobCount_BuildKillLine = BuildLine
 
 -- ========================= Tooltip =========================
-local function readableTooltipValue(value)
+local function readableValue(value)
   if type(issecretvalue) == "function" and issecretvalue(value) then return false end
   if type(canaccessvalue) == "function" and not canaccessvalue(value) then return false end
   return true
+end
+
+local function readString(getter, argument)
+  local ok, value = pcall(getter, argument)
+  if ok and readableValue(value) and type(value) == "string" and value ~= "" then
+    return value
+  end
 end
 
 local function displayedTooltipUnit(tt)
@@ -239,14 +233,14 @@ local function displayedTooltipUnit(tt)
   local getter = tt and tt.GetUnit
   if type(getter) == "function" then
     local ok, _, unit = pcall(getter, tt)
-    if ok and readableTooltipValue(unit) and type(unit) == "string" and unit ~= "" then
+    if ok and readableValue(unit) and type(unit) == "string" and unit ~= "" then
       return unit
     end
   end
   getter = TooltipUtil and TooltipUtil.GetDisplayedUnit
   if type(getter) == "function" then
     local ok, _, unit = pcall(getter, tt)
-    if ok and readableTooltipValue(unit) and type(unit) == "string" and unit ~= "" then
+    if ok and readableValue(unit) and type(unit) == "string" and unit ~= "" then
       return unit
     end
   end
@@ -255,49 +249,20 @@ end
 local function TooltipUnit(tt)
   local unit = displayedTooltipUnit(tt)
   if not unit then return end
-  local ok, guid = pcall(UnitGUID, unit)
-  -- During combat Forever may hide identity. Never substitute a cached target
-  -- or compare/index a secret GUID: omit the line until identity is readable.
-  if not ok or not readableTooltipValue(guid) or not isCreatureGUID(guid) then return end
-  local canAttack
-  ok, canAttack = pcall(UnitCanAttack, "player", unit)
-  if not ok or not readableTooltipValue(canAttack) or not canAttack then return end
-  local inCombat = InCombatLockdown()
-  local id=npcIdFromGUID(guid); local cnt=0
-  local nm = nameByGUID[guid]
-  if not inCombat then
-    local nameOK, name = pcall(UnitName, unit)
-    if nameOK and readableTooltipValue(name) and type(name) == "string" then
-      nm = name
-      nameByGUID[guid] = name
-      if id then noteNameId(name, id) end
-      if recentTargets[guid] then recentTargets[guid].name = name end
-    end
+  -- Forever may hide unit identity. Only use the GUID of the displayed unit.
+  local guid = readString(UnitGUID, unit)
+  if not guid then return end
+  local id = npcIdFromGUID(guid)
+  if not id then return end
+  local ok, canAttack = pcall(UnitCanAttack, "player", unit)
+  if not ok or not readableValue(canAttack) or not canAttack then return end
+
+  local count = killsById[id] or 0
+  if count > 0 and not InCombatLockdown() and (not namesById[id] or namesById[id] == "") then
+    -- A kill can expose the victim's GUID before its name is readable.
+    namesById[id] = readString(UnitName, unit)
   end
-  -- Combat identity/health values are secret on Forever, but become readable
-  -- again afterward. If this corpse was observed alive, reconcile the kill as
-  -- soon as its native Blizzard tooltip is built.
-  if not inCombat and IsUnitDeadCompat and IsUnitDeadCompat(unit) then
-    local state = recentTargets[guid]
-    if not state and pendingKillCredits > 0 then
-      state = {
-        guid = guid,
-        id = id,
-        name = nm or "",
-        wasAlive = true,
-        lastSeen = GetTime(),
-      }
-      recentTargets[guid] = state
-      pendingKillCredits = pendingKillCredits - 1
-    end
-    if state and not counted[guid] then CreditObservedTarget(state, "corpse tooltip") end
-  end
-  if id then
-    cnt=killsById[id] or 0
-  else
-    if nm then cnt=killsByName[nm] or 0 end
-  end
-  tt:AddLine(BuildLine(DWD_MobCountConfig.textStyle,cnt),1,1,1)
+  tt:AddLine(BuildLine(DWD_MobCountConfig.textStyle,count),1,1,1)
   -- This callback runs while Blizzard is already building and showing the
   -- tooltip. Calling Show again is re-entrant on Forever and taints an
   -- internal Frame:RegisterEvent operation.
@@ -416,7 +381,7 @@ ShowList = function()
   parent.rows = parent.rows or {}
 
   local arr={}
-  for id,c in pairs(killsById) do arr[#arr+1]={name=(namesById[id] or ("NPC "..id)), cnt=c} end
+  for id,c in pairs(killsById) do arr[#arr+1]={name=(namesById[id] and namesById[id] ~= "" and namesById[id] or ("NPC "..id)), cnt=c} end
   for nm,c in pairs(killsByName) do arr[#arr+1]={name=nm, cnt=c} end
   table.sort(arr,function(a,b) if a.cnt==b.cnt then return a.name<b.name end return a.cnt>b.cnt end)
 
@@ -435,280 +400,38 @@ ShowList = function()
   listFrame:Show()
 end
 
--- ========================= Credit helpers =========================
-creditKillById = function(id, nm)
-  if not ensureCharTables() then return end
+-- ========================= Kill attribution =========================
+local function CreditKillingBlow(attackerGUID, victimGUID)
+  -- PARTY_KILL supplies both GUIDs. In restricted content either may be secret.
+  if not readableValue(attackerGUID) or not readableValue(victimGUID) then return end
+  if type(attackerGUID) ~= "string" or attackerGUID == "" or type(victimGUID) ~= "string" then return end
+  local id = npcIdFromGUID(victimGUID)
   if not id then return end
-  namesById[id] = nm or namesById[id] or ""
+  if attackerGUID ~= readString(UnitGUID, "player")
+    and attackerGUID ~= readString(UnitGUID, "pet")
+    and attackerGUID ~= readString(UnitGUID, "vehicle") then return end
+
+  local now = GetTime()
+  if now >= nextKillPrune then
+    for guid, timestamp in pairs(recentKills) do
+      if now - timestamp >= 2 then recentKills[guid] = nil end
+    end
+    nextKillPrune = now + 60
+  end
+  local previous = recentKills[victimGUID]
+  if previous and now - previous < 2 then return end
+  if not ensureCharTables() then return end
+
+  recentKills[victimGUID] = now
+  local name = readString(UnitNameFromGUID, victimGUID)
+  if not name and readString(UnitGUID, "target") == victimGUID then
+    name = readString(UnitName, "target")
+  end
+  if name then namesById[id] = name end
   killsById[id] = (killsById[id] or 0) + 1
   persistCurrentCounts()
   if listFrame and listFrame:IsShown() and ShowList then ShowList() end
-  dbg("credit ID", id, "name", nm or "", "total", killsById[id])
-end
-
-creditKillByName = function(nm)
-  if not ensureCharTables() then return end
-  if not nm or nm=="" then return end
-  killsByName[nm] = (killsByName[nm] or 0) + 1
-  persistCurrentCounts()
-  if listFrame and listFrame:IsShown() and ShowList then ShowList() end
-  dbg("credit NAME", nm, "total", killsByName[nm])
-end
-
--- ========================= Mine / Flags =========================
-local band = bit.band
-isMineSource = function(srcGUID, srcName, srcFlags)
-  if srcGUID and playerGUID and srcGUID==playerGUID then return true end
-  local pet=UnitGUID("pet"); if pet and srcGUID==pet then return true end
-  local veh=UnitGUID("vehicle"); if veh and srcGUID==veh then return true end
-  if srcName and (srcName==playerName or srcName==playerFullName) then return true end
-  local affiliationMask=(COMBATLOG_OBJECT_AFFILIATION_MINE or 0)
-                       +(COMBATLOG_OBJECT_AFFILIATION_PARTY or 0)
-                       +(COMBATLOG_OBJECT_AFFILIATION_RAID or 0)
-  if type(srcFlags)=="number" then
-    local ok,result=pcall(band,srcFlags,affiliationMask)
-    if ok and result~=0 then return true end
-  end
-  return false
-end
-
-IsUnitDeadCompat = function(unit)
-  if type(UnitIsDeadOrGhost) == "function" then
-    local ok, dead = pcall(function() return UnitIsDeadOrGhost(unit) and true or false end)
-    if ok and dead then return true end
-  end
-  if type(UnitIsDead) == "function" then
-    local ok, dead = pcall(function() return UnitIsDead(unit) and true or false end)
-    if ok and dead then return true end
-  end
-  if type(UnitHealth) == "function" then
-    local ok, dead = pcall(function() return UnitHealth(unit) <= 0 end)
-    if ok and dead then return true end
-  end
-  return false
-end
-
-local function RememberTarget(state)
-  if not state or not state.guid then return end
-  state.lastSeen = GetTime()
-  recentTargets[state.guid] = state
-end
-
-CreditObservedTarget = function(state, reason)
-  if not state or not state.guid or not state.wasAlive or counted[state.guid] then return false end
-  if state.id then creditKillById(state.id, state.name) else creditKillByName(state.name) end
-  counted[state.guid] = GetTime()
-  state.wasAlive = false
-  state.credited = true
-  if DWD_MobCountConfig.debug then
-    dbg("credit", reason or "observed death", state.name or "", state.id or "nil")
-  end
-  return true
-end
-
-local function CreditMostRecentTarget(reason, maxAge)
-  local now = GetTime()
-  local best
-  maxAge = tonumber(maxAge) or 12
-  for guid,state in pairs(recentTargets) do
-    local age = state.lastSeen and (now - state.lastSeen) or nil
-    if age and age > 30 then
-      recentTargets[guid] = nil
-    elseif age and age <= maxAge and state.wasAlive and not counted[guid]
-    and (not best or (state.lastSeen or 0) > (best.lastSeen or 0)) then
-      best = state
-    end
-  end
-  return CreditObservedTarget(best, reason)
-end
-
-local function HandleKillSignal(reason)
-  local now = GetTime()
-  -- PLAYER_XP_UPDATE and CHAT_MSG_COMBAT_XP_GAIN normally describe the same
-  -- kill and arrive together. Coalesce that pair without suppressing normal
-  -- consecutive kills.
-  if now - lastKillSignalAt < 0.5 then return end
-  lastKillSignalAt = now
-  if not CreditMostRecentTarget(reason, 8) then
-    pendingKillCredits = pendingKillCredits + 1
-  end
-end
-
-local function CreditRecentTargetFromMessage(message, reason)
-  if type(message) ~= "string" or message == "" then return false end
-
-  local now = GetTime()
-  local best
-  for guid,state in pairs(recentTargets) do
-    if not state.lastSeen or now - state.lastSeen > 30 then
-      recentTargets[guid] = nil
-    elseif state.wasAlive and not counted[guid] and state.name and state.name ~= ""
-    and message:find(state.name, 1, true) then
-      if not best or (state.lastSeen or 0) > (best.lastSeen or 0) then best = state end
-    end
-  end
-
-  return CreditObservedTarget(best, reason)
-end
-
-local function CreditDeadGUID(guid)
-  if guid == nil then return false end
-  if type(canaccessvalue) == "function" and not canaccessvalue(guid) then return false end
-
-  local state = recentTargets[guid]
-  if not state and observedTarget and observedTarget.guid == guid then
-    state = observedTarget
-  end
-  return CreditObservedTarget(state, "UNIT_DIED")
-end
-
--- Forever protects the global combat log, so observe the selected creature's
--- alive-to-dead transition instead. A creature GUID is unique for that spawn;
--- the counted table therefore guarantees exactly one credit per death.
-local function ObserveTarget()
-  -- Forever makes target identity and health secret during combat. Reading or
-  -- comparing those values here cannot determine death and can taint tables.
-  -- XP/death signals queue the credit; reconciliation happens afterward.
-  if InCombatLockdown() then return end
-  local unit = "target"
-  if not UnitExists(unit) or UnitIsPlayer(unit) then
-    observedTarget = nil
-    return
-  end
-
-  local guid = UnitGUID(unit)
-  if not (guid and isCreatureGUID(guid)) then
-    observedTarget = nil
-    return
-  end
-
-  local dead = IsUnitDeadCompat(unit)
-  if not observedTarget or observedTarget.guid ~= guid then
-    -- Do not count a corpse that was first targeted after it died. The spawn
-    -- must have been observed alive on this character. Do not require
-    -- UnitCanAttack/UnitIsTapDenied: Forever reports critters and some neutral
-    -- mobs differently from Classic Era even when the player killed them.
-    if dead then
-      -- A target can disappear behind secret combat values and become readable
-      -- again only after combat. Credit it if we did observe this exact spawn
-      -- alive earlier; still ignore corpses first encountered after death.
-      local remembered = recentTargets[guid]
-      if not remembered and pendingKillCredits > 0 then
-        remembered = {
-          guid = guid,
-          id = npcIdFromGUID(guid),
-          name = UnitName(unit) or "",
-          wasAlive = true,
-          lastSeen = GetTime(),
-        }
-        recentTargets[guid] = remembered
-        pendingKillCredits = pendingKillCredits - 1
-      end
-      if remembered then
-        observedTarget = remembered
-        CreditObservedTarget(remembered, "post-combat target death")
-      else
-        observedTarget = nil
-      end
-      return
-    end
-    local name = UnitName(unit) or ""
-    observedTarget = {
-      guid = guid,
-      id = npcIdFromGUID(guid),
-      name = name,
-      wasAlive = true,
-    }
-    RememberTarget(observedTarget)
-    lastHostileGUID, lastHostileName = guid, name
-    nameByGUID[guid] = name
-    return
-  end
-
-  local state = observedTarget
-  local name = UnitName(unit)
-  if name and name ~= "" then
-    state.name = name
-    nameByGUID[guid] = name
-  end
-  RememberTarget(state)
-
-  if not dead then
-    state.wasAlive = true
-    return
-  end
-
-  if state.wasAlive and not counted[guid] then
-    CreditObservedTarget(state, "target death")
-  end
-end
-
-local function TrackHostileTarget()
-  ObserveTarget()
-end
-
-local function HandleTargetDeath(unit)
-  if unit == "target" then ObserveTarget() end
-end
-
--- ========================= Combat Log Counting =========================
-local TAG_TTL = 25
-local TAG_EVENTS = {
-  SWING_DAMAGE=true, SWING_MISSED=true,
-  RANGE_DAMAGE=true, RANGE_MISSED=true,
-  SPELL_DAMAGE=true, SPELL_MISSED=true,
-  SPELL_PERIODIC_DAMAGE=true, SPELL_PERIODIC_MISSED=true,
-  DAMAGE_SHIELD=true, DAMAGE_SPLIT=true,
-  ENVIRONMENTAL_DAMAGE=true,
-}
-
-local function HandleCLEU()
-  -- emergency init if CLEU fires super-early
-  if not charKey then
-    local nm, rm = DWD_ForeverIdentity.Get("player")
-    playerName = nm or UnitName("player") or "Unknown"
-    playerRealm = rm or GetRealmName() or "UnknownRealm"
-    playerFullName = playerName.."-"..playerRealm
-    playerGUID = UnitGUID("player")
-    charKey = countCharacterKey()
-    ensureCharTables()
-  end
-
-  local _, subevent, _, srcGUID, srcName, srcFlags, _, dstGUID, dstName, dstFlags = CombatLogGetCurrentEventInfo()
-
-  -- Classic-safe: treat any Creature/Vehicle dest as a mob; don't rely on reaction flags
-  if TAG_EVENTS[subevent] and dstGUID and isCreatureGUID(dstGUID) and isMineSource(srcGUID, srcName, srcFlags) then
-    taggedGUID[dstGUID]=GetTime()
-    if dstName and dstName~="" then taggedName[dstName]=GetTime() end
-    if DWD_MobCountConfig.debug then dbg("tag", dstName or tostring(dstGUID), subevent) end
-  end
-
-  -- PARTY_KILL (if present) → credit directly
-  if subevent=="PARTY_KILL" and dstGUID and isCreatureGUID(dstGUID) then
-    local now=GetTime()
-    if not counted[dstGUID] or (now-counted[dstGUID])>2 then
-      local id=npcIdFromGUID(dstGUID); local nm=dstName or nameByGUID[dstGUID] or ""
-      if id then creditKillById(id,nm) else creditKillByName(nm) end
-      counted[dstGUID]=now
-      if DWD_MobCountConfig.debug then dbg("credit PARTY_KILL", nm, id or "nil") end
-    end
-    return
-  end
-
-  -- UNIT_DIED → credit if you recently tagged it
-  if subevent=="UNIT_DIED" and dstGUID and isCreatureGUID(dstGUID) then
-    local t=taggedGUID[dstGUID]
-    if (t and (GetTime()-t)<=TAG_TTL) or dstGUID==lastHostileGUID then
-      local now=GetTime()
-      if not counted[dstGUID] or (now-counted[dstGUID])>2 then
-        local id=npcIdFromGUID(dstGUID); local nm=dstName or nameByGUID[dstGUID] or ""
-        if id then creditKillById(id,nm) else creditKillByName(nm) end
-        counted[dstGUID]=now
-        if DWD_MobCountConfig.debug then dbg("credit UNIT_DIED", nm, id or "nil") end
-      end
-    end
-    taggedGUID[dstGUID]=nil
-  end
+  dbg("credit ID", id, "name", namesById[id] or "", "total", killsById[id])
 end
 
 -- ========================= Slash (ONLY /dwdmc) =========================
@@ -755,69 +478,23 @@ local frame=CreateFrame("Frame")
 frame:RegisterEvent("PLAYER_LOGIN")
 frame:RegisterEvent("PLAYER_LOGOUT")
 frame:RegisterEvent("PLAYER_LEAVING_WORLD")
--- Forever protects the global combat-log registration. The target health
--- fallback below provides the same player-facing kill count without tainting
--- Frame:RegisterEvent. Limit health events to the target unit as well.
-if type(frame.RegisterUnitEvent) == "function" then
-  frame:RegisterUnitEvent("UNIT_HEALTH", "target")
-else
-  frame:RegisterEvent("UNIT_HEALTH")
-end
-frame:RegisterEvent("PLAYER_TARGET_CHANGED")
-frame:RegisterEvent("PLAYER_REGEN_ENABLED")
-frame:RegisterEvent("PLAYER_XP_UPDATE")
-pcall(frame.RegisterEvent, frame, "CHAT_MSG_COMBAT_HOSTILE_DEATH")
-pcall(frame.RegisterEvent, frame, "CHAT_MSG_COMBAT_XP_GAIN")
-if type(frame.RegisterUnitEvent) == "function" then
-  pcall(frame.RegisterUnitEvent, frame, "UNIT_FLAGS", "target")
-  pcall(frame.RegisterUnitEvent, frame, "UNIT_HEALTH_FREQUENT", "target")
-else
-  pcall(frame.RegisterEvent, frame, "UNIT_FLAGS")
-  pcall(frame.RegisterEvent, frame, "UNIT_HEALTH_FREQUENT")
-end
-local targetPollElapsed = 0
-frame:SetScript("OnUpdate", function(_, elapsed)
-  targetPollElapsed = targetPollElapsed + (tonumber(elapsed) or 0)
-  if targetPollElapsed < 0.05 then return end
-  targetPollElapsed = 0
-  ObserveTarget()
-end)
+frame:RegisterEvent("PARTY_KILL")
 frame:SetScript("OnEvent", function(_, event, arg1, arg2)
   if event=="PLAYER_LOGIN" then
     if initialized then return end
     initialized=true
-    local nm, rm = DWD_ForeverIdentity.Get("player")
-    playerName = nm or UnitName("player") or "Unknown"
-    playerRealm = rm or GetRealmName() or "UnknownRealm"
-    playerFullName = playerName.."-"..playerRealm
-    playerGUID = UnitGUID("player")
-    charKey = countCharacterKey() or (playerRealm.."-"..playerName)
+    charKey = countCharacterKey()
+    if not charKey then
+      local nm, rm = DWD_ForeverIdentity.Get("player")
+      charKey = (rm or GetRealmName() or "UnknownRealm").."-"..(nm or UnitName("player") or "Unknown")
+    end
     ensureCharTables()
     persistCurrentCounts()
     HookTooltipsOnce()
-    TrackHostileTarget()
     if DWD_MobCountConfig.debug then chat("|cffffff00MobCount:|r init "..charKey) end
   elseif event=="PLAYER_LOGOUT" or event=="PLAYER_LEAVING_WORLD" then
     persistCurrentCounts()
-  elseif event=="UNIT_HEALTH" or event=="UNIT_HEALTH_FREQUENT" or event=="UNIT_FLAGS" then
-    HandleTargetDeath(arg1)
-  elseif event=="PLAYER_TARGET_CHANGED" then
-    TrackHostileTarget()
-  elseif event=="PLAYER_REGEN_ENABLED" then
-    -- Restricted unit values are readable again now. This is the accurate
-    -- fallback for gray mobs and critters that grant no XP.
-    ObserveTarget()
-  elseif event=="PLAYER_XP_UPDATE" then
-    -- XP updates identify a completed kill without touching protected combat
-    -- data. The exact spawn was recorded when it was targeted alive.
-    HandleKillSignal(event)
-  elseif event=="CHAT_MSG_COMBAT_XP_GAIN" then
-    -- XP messages do not contain the creature name on Forever, so match the
-    -- most recently observed live target instead of searching message text.
-    HandleKillSignal(event)
-  elseif event=="CHAT_MSG_COMBAT_HOSTILE_DEATH" then
-    if not CreditRecentTargetFromMessage(arg1, event) then
-      HandleKillSignal(event)
-    end
+  elseif event=="PARTY_KILL" and initialized then
+    CreditKillingBlow(arg1, arg2)
   end
 end)

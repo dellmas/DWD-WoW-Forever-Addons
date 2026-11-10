@@ -6,7 +6,7 @@
 ## Title: DWD Mob Kill Counter
 ## Notes: Shows per-NPC kill count on unit tooltips; includes list & options.
 ## Author: dellmas
-## Version: 0.0.1-forever.24
+## Version: 0.0.1-forever.25
 ## SavedVariables: DWD_MobCountDB, DWD_MobCountBackup, DWD_MobCountLastClear, DWD_MobCountConfig, DWD_MobCountConfigByCharacter
 
 ForeverIdentity.lua

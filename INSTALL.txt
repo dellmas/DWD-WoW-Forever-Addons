@@ -1,4 +1,4 @@
-WoW Forever Addon Pack v1.0.13
+WoW Forever Addon Pack v1.0.14
 Updated November 6, 2026: the DWD Profiles addons have been removed.
 This archive contains 26 addon folders. Use the latest release for current versions.
 
@@ -41,3 +41,7 @@ and DWD-prefixed display names. Party XP is named DWD Party XP. Addon folder
 names, CurseForge project IDs, Lua code and settings are unchanged. Reload or
 restart WoW to refresh addon-list metadata. CurseForge app names/logos can
 lag until moderation, refresh or app restart.
+
+Mob Kill Counter 0.0.1-forever.25 counts NPC killing blows reported for your
+character, pet, or vehicle. Forever may hide the attacker or victim in some
+content, and those deaths are skipped. Run /reload after updating.

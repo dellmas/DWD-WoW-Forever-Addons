@@ -3,7 +3,7 @@
 ![Dog Water Development](branding/DogWater.jpg)
 
 A CurseForge-recognized addon pack for **World of Warcraft: Forever 1.60.1**
-(interface 16001). Version **v1.0.13** contains **26 addon folders from 21
+(interface 16001). Version **v1.0.14** contains **26 addon folders from 21
 CurseForge projects**, including official Bartender4, Questie, QuestieDB, and
 all six DWD addons. Bundled modules appear under their parent project.
 
@@ -27,6 +27,13 @@ addon settings and inactive saved profile data are retained.
 
 The previous public ZIP downloads and legacy updater feeds have also had
 these addons removed. Each remaining addon saves its own settings.
+
+## Mob Kill Counter attribution
+
+Mob Kill Counter 0.0.1-forever.25 credits NPC killing blows from the player,
+their pet, or their vehicle. The addon skips events when Forever hides either
+unit's identity. Your settings and existing totals are preserved. Run `/reload`
+after updating.
 
 ## Consistent DWD names and logo
 
