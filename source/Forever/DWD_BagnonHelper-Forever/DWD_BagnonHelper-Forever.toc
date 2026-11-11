@@ -3,9 +3,9 @@
 ## Interface: 16001
 ## AllowLoadGameType: camelot, forever
 ## Title: DWD Bagnon Helper
-## Notes: Opens Bagnon's inventory at login and keeps it open until its X is clicked.
+## Notes: Keeps Bagnon inventory open and styles empty ammo and reagent slots.
 ## Author: dellmas
-## Version: 1.0.0-forever.3
+## Version: 1.0.0-forever.4
 ## Dependencies: Bagnon
 ## Category: Bags & Inventory
 

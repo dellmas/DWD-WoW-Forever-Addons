@@ -3,7 +3,7 @@
 ![Dog Water Development](branding/DogWater.jpg)
 
 A CurseForge-recognized addon pack for **World of Warcraft: Forever 1.60.1**
-(interface 16001). Version **v1.0.16** contains **26 addon folders from 21
+(interface 16001). Version **v1.0.17** contains **26 addon folders from 21
 CurseForge projects**, including official Bartender4, Questie, QuestieDB, and
 all six DWD addons. Bundled modules appear under their parent project.
 
@@ -54,15 +54,14 @@ Folder names, project IDs, saved-variable contracts, Lua code and existing
 resources remain unchanged. The same logo is included in each addon, with no
 new cross-addon dependency. See [branding standards](BRANDING.md).
 
-## Bagnon inventory opens at login
+## Bagnon empty ammo and reagent slots
 
-DWD Bagnon Helper 1.0.0-forever.3 opens inventory once after Bagnon finishes
-initializing at login or after `/reload`. Click the X to close it. Changing zones
-respects that choice. Map, Escape and bag toggles leave an open inventory open.
-Bank windows keep their normal behavior.
+DWD Bagnon Helper 1.0.0-forever.4 uses an embossed quiver for empty ammo slots
+and an embossed Linen Reagent Bag for empty reagent slots. Both use Bagnon's
+beveled frame. Filled slots and profession bags retain their native artwork.
 
-Enable the helper with Bagnon. Run `/reload` after updating an existing install.
-Bagnon and BagBrother settings are preserved. `/dwdbags` shows the helper status.
+The helper opens inventory at login and after `/reload`. Click X to close it.
+Enable it with Bagnon. `/dwdbags` shows its status.
 
 [Helper source](source/Forever/DWD_BagnonHelper-Forever)
 

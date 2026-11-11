@@ -1,5 +1,5 @@
 {
-  "pack_version": "v1.0.16",
+  "pack_version": "v1.0.17",
   "game": "WoW Forever",
   "game_version": "1.60.1",
   "interface": 16001,
@@ -692,18 +692,20 @@
     {
       "name": "DWD Bagnon Helper",
       "project_id": 1788396,
-      "file_id": 9550677,
-      "filename": "DWD-BagnonHelper-1.0.0-forever.3.zip",
-      "download_url": "https://edge.forgecdn.net/files/9550/677/DWD-BagnonHelper-1.0.0-forever.3.zip",
-      "sha256": "da190a367d4a42c589dce55f1c73d1828e77c10532679dec95d37470946fdbc7",
+      "file_id": 9552301,
+      "filename": "DWD-BagnonHelper-1.0.0-forever.4.zip",
+      "download_url": "https://edge.forgecdn.net/files/9552/301/DWD-BagnonHelper-1.0.0-forever.4.zip",
+      "sha256": "967c67fa03f544af616b3f0033b162d1f35ddeb0d95c9d945b72e9bcabc38258",
       "folders": [
         "DWD_BagnonHelper-Forever"
       ],
       "files": {
-        "DWD_BagnonHelper-Forever/Core.lua": "dd90890bbff0518ad92f80783f7d68bb424de714bc45a289c907a1f2f1bc7702",
+        "DWD_BagnonHelper-Forever/Core.lua": "bf2266db2062fad27c9b7e3c4c8e90047f240beb84ed567eb17ce303c538f231",
         "DWD_BagnonHelper-Forever/DWDLogo.tga": "f6061afa84fef87aabe50a55eabf4f5efa303919decdec3fab8b83299bf9c5de",
-        "DWD_BagnonHelper-Forever/DWD_BagnonHelper-Forever.toc": "61d4dfe8c205c6f386dd0d536668b11ea18c66f532dcb5af1ff79b49bdf51aff",
-        "DWD_BagnonHelper-Forever/README.txt": "e1967f81398f429659dd7a696e6613cc6aa1a51706df295c32fcf82609f80224"
+        "DWD_BagnonHelper-Forever/DWD_BagnonHelper-Forever.toc": "b173c0930ebedeb9c996ef531884630bdecd8b447804e4f2bdd471a8e683fde0",
+        "DWD_BagnonHelper-Forever/LinenReagentRelief.tga": "5bf16a62951a1567fa32d6b86b441020999f22f83a1814f1e942c564b1bb4be7",
+        "DWD_BagnonHelper-Forever/QuiverOutlinedRelief.tga": "9adb1f630ea336cd2a52bc5994cfbc0419616dd2ccb59e2e51ad2bd31ddf02c0",
+        "DWD_BagnonHelper-Forever/README.txt": "cd16046ac67651d5de9d938a9d8af4d3ecd8b1aa72c921eda2e4489714fda5d7"
       }
     },
     {

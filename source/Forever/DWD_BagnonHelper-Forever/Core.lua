@@ -1,12 +1,78 @@
 -- DWD Bagnon Helper - Forever
--- Only the inventory window is guarded. No Blizzard bag/UI functions or
+-- Only the inventory window is guarded and styled. No Blizzard bag/UI functions or
 -- Bagnon source files are replaced, and no bag settings or item data are saved.
 local ADDON = ...
 local controller = CreateFrame("Frame")
 local states = setmetatable({}, {__mode = "k"})
+local styledGroups = setmetatable({}, {__mode = "k"})
+local styledSlots = setmetatable({}, {__mode = "k"})
 local bagnon, attachedManager
 local leavingWorld, loggingOut = false, false
 local openOnLogin, loginOpenQueued = true, false
+
+local artPath = "Interface\\AddOns\\" .. ADDON .. "\\"
+local specialtyArt = {
+  quiver = artPath .. "QuiverOutlinedRelief.tga",
+  reagent = artPath .. "LinenReagentRelief.tga",
+}
+
+local function styleEmptySlot(button)
+  local slot = styledSlots[button]
+  local art
+  if button.frame and button.frame.id == "inventory" and button.BagFamilies
+    and not button.hasItem and button.info and not button.info.iconFileID then
+    local family = button:GetBagFamily(button:GetBag())
+    if not (type(issecretvalue) == "function" and issecretvalue(family)) then
+      art = specialtyArt[button.BagFamilies[family]]
+    end
+  end
+  if not art then
+    if slot.relief then slot.relief:Hide() end
+    return
+  end
+
+  -- The relief replaces the interior only. Its transparent perimeter leaves
+  -- the native bevel and corner shading visible.
+  if not slot.relief then
+    local icon = GetItemButtonIconTexture(button)
+    if not icon then return end
+    slot.relief = button:CreateTexture(nil, "ARTWORK", nil, 1)
+    slot.relief:SetAllPoints(icon)
+  end
+  if slot.art ~= art then
+    slot.loaded = slot.relief:SetTexture(art)
+    slot.art = art
+  end
+  if not slot.loaded then
+    slot.relief:Hide()
+    return
+  end
+  local settings = bagnon.sets
+  local color = settings and settings.colorSlots and settings.color and settings.color.normal
+  local r, g, b = color and color[1] or 1, color and color[2] or 1, color and color[3] or 1
+  SetItemButtonTextureVertexColor(button, r, g, b)
+  button:GetNormalTexture():SetVertexColor(r, g, b)
+  slot.relief:SetVertexColor(r, g, b)
+  slot.relief:Show()
+end
+
+local function attachSlots(group)
+  for _, button in ipairs(group.buttons or {}) do
+    if not styledSlots[button] and type(button.Update) == "function" then
+      styledSlots[button] = {}
+      hooksecurefunc(button, "Update", styleEmptySlot)
+      styleEmptySlot(button)
+    end
+  end
+end
+
+local function attachItemGroup(frame)
+  local group = rawget(frame, "ItemGroup")
+  if not group or styledGroups[group] or type(group.Layout) ~= "function" then return end
+  hooksecurefunc(group, "Layout", attachSlots)
+  styledGroups[group] = true
+  attachSlots(group)
+end
 
 local function chat(message)
   print("|cff00c0ffDWD Bagnon Helper:|r " .. message)
@@ -112,6 +178,10 @@ local function attachFrame(frame)
   end)
   if type(frame.UpdateVisuals) == "function" then
     hooksecurefunc(frame, "UpdateVisuals", function() bindCloseButton(state) end)
+  end
+  if type(frame.PlaceItemGroup) == "function" then
+    hooksecurefunc(frame, "PlaceItemGroup", attachItemGroup)
+    attachItemGroup(frame)
   end
   removeEscapeEntry(frame)
   bindCloseButton(state)

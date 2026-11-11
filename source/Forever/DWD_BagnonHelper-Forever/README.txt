@@ -1,4 +1,4 @@
-DWD Bagnon Helper 1.0.0-forever.3
+DWD Bagnon Helper 1.0.0-forever.4
 Requires Bagnon. Designed against Bagnon / BagBrother 12.1.8 on Forever 1.60.1.
 
 Inventory opens automatically at login and after a UI reload. Click its X to
@@ -7,6 +7,10 @@ Map maximization, Escape, bag hotkeys/backpack buttons, merchant/character
 window changes, combat/vehicle events, and other normal hide requests cannot
 close it. Bag hotkeys can still open a closed inventory. The X stays available
 even if the selected Bagnon skin normally hides it.
+
+Empty ammo and quiver slots show an embossed quiver with dark seams. Empty
+reagent slots show an embossed Linen Reagent Bag. Both preserve Bagnon's beveled frame.
+Profession bags and occupied slots use Bagnon's regular visuals.
 
 Only inventory is guarded. Bank, guild bank, void storage, other windows and
 the game menu keep their normal behavior. Global UI hiding, loading screens,
