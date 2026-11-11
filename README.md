@@ -3,7 +3,7 @@
 ![Dog Water Development](branding/DogWater.jpg)
 
 A CurseForge-recognized addon pack for **World of Warcraft: Forever 1.60.1**
-(interface 16001). Version **v1.0.14** contains **26 addon folders from 21
+(interface 16001). Version **v1.0.15** contains **26 addon folders from 21
 CurseForge projects**, including official Bartender4, Questie, QuestieDB, and
 all six DWD addons. Bundled modules appear under their parent project.
 
@@ -47,25 +47,15 @@ Folder names, project IDs, saved-variable contracts, Lua code and existing
 resources remain unchanged. The same logo is included in each addon, with no
 new cross-addon dependency. See [branding standards](BRANDING.md).
 
-## Previous addition: Bagnon inventory stays open
+## Bagnon inventory opens at login
 
-DWD Bagnon Helper - Forever 1.0.0-forever.1 keeps Bagnon inventory open until
-you click its close X. Map maximization, Escape, bag toggles, and interaction
-close requests leave inventory open. Bag keys still open a closed inventory.
-Bank windows and other UI windows keep their usual behavior. The X stays
-available with skins that normally hide it.
+DWD Bagnon Helper 1.0.0-forever.3 opens inventory once after Bagnon finishes
+initializing at login or after `/reload`. Click the X to close it. Changing zones
+respects that choice. Map, Escape and bag toggles leave an open inventory open.
+Bank windows keep their normal behavior.
 
-Restart WoW to discover this new addon folder, and enable both the helper and
-Bagnon. `/dwdbags` shows status. Disable the helper and reload to restore
-normal closing. Bagnon/BagBrother files and saved settings remain unchanged.
-Twenty Lua 5.1 checks exercise the installed 12.1.8 window-management code;
-the live result still needs checking in-game. Global UI hiding, loading,
-logout, and UI restarts remain under WoW's control. Protected native bypasses
-in combat wait until combat ends to restore the window.
-
-The new CurseForge project and file require moderation before app detection.
-Install this helper from the full ZIP or CurseForge; the legacy updater does
-not include newly added addon names.
+Enable the helper with Bagnon. Run `/reload` after updating an existing install.
+Bagnon and BagBrother settings are preserved. `/dwdbags` shows the helper status.
 
 [Helper source](source/Forever/DWD_BagnonHelper-Forever)
 

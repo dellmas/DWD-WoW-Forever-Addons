@@ -82,7 +82,7 @@
   },
   {
     "addon": "DWD_BagnonHelper-Forever",
-    "version": "1.0.0-forever.2",
+    "version": "1.0.0-forever.3",
     "interface": "16001",
     "project_ids": [
       1788396

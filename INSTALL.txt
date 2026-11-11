@@ -1,4 +1,4 @@
-WoW Forever Addon Pack v1.0.14
+WoW Forever Addon Pack v1.0.15
 Updated November 6, 2026: the DWD Profiles addons have been removed.
 This archive contains 26 addon folders. Use the latest release for current versions.
 
@@ -28,13 +28,10 @@ by the tooltip. Player/pet tooltips are excluded. Counts are omitted while
 Forever hides identity, rather than using an unrelated cached target. Run
 /reload after updating. Existing kill totals and settings remain in WTF.
 
-DWD Bagnon Helper - Forever is new in this release. Restart WoW to discover
-the new folder. Enable it together with Bagnon. Open inventory normally; only
-its close X closes it. Map, Escape and bag toggles leave it open. /dwdbags
-shows status. Disable the helper and reload to restore normal closing. No
-Bagnon files or settings are modified. New CurseForge project approval and
-indexing are pending. The legacy desktop updater does not install this helper;
-use the full ZIP or CurseForge.
+DWD Bagnon Helper 1.0.0-forever.3 opens Bagnon inventory after login and UI
+reload. Click X to close it. Map, Escape and bag toggles leave it open, and
+changing zones respects the X. Enable it with Bagnon and run /reload after
+updating. /dwdbags shows status.
 
 Branding release: all six published DWD addons use the same Dog Water logo
 and DWD-prefixed display names. Party XP is named DWD Party XP. Addon folder

@@ -6,6 +6,7 @@ local controller = CreateFrame("Frame")
 local states = setmetatable({}, {__mode = "k"})
 local bagnon, attachedManager
 local leavingWorld, loggingOut = false, false
+local openOnLogin, loginOpenQueued = true, false
 
 local function chat(message)
   print("|cff00c0ffDWD Bagnon Helper:|r " .. message)
@@ -46,6 +47,17 @@ local function queueRestore(state)
   end)
 end
 
+local function queueLoginOpen()
+  if not openOnLogin or loginOpenQueued or not attachedManager or leavingWorld or loggingOut then return end
+  loginOpenQueued = true
+  C_Timer.After(0, function()
+    loginOpenQueued = false
+    if not openOnLogin or leavingWorld or loggingOut or not bagnon.Ready or InCombatLockdown() then return end
+    openOnLogin = false
+    if not attachedManager:IsShown("inventory") then attachedManager:Show("inventory") end
+  end)
+end
+
 local function bindCloseButton(state)
   local button = state.frame.CloseButton
   if not button then return end
@@ -54,7 +66,7 @@ local function bindCloseButton(state)
     state.closeHandler = function(self, ...)
       -- One explicit X click releases this window, including any queued
       -- restoration. Its next normal open arms the guard again.
-      state.keepOpen, state.pending = false, false
+      state.keepOpen, state.pending, openOnLogin = false, false, false
       if original then return original(self, ...) end
       return state.hide(state.frame)
     end
@@ -115,9 +127,13 @@ local function initialize()
   if not bagnon or not bagnon.Frames or type(bagnon.Frames.New) ~= "function" then return end
   if not attachedManager then
     attachedManager = bagnon.Frames
-    -- Runs after registration but before Frames:Show calls frame:Show, so the
-    -- first real open is guarded without creating/opening a window ourselves.
+    -- Attach before Frames:Show calls frame:Show so the first open is guarded.
     hooksecurefunc(attachedManager, "New", attachExisting)
+    hooksecurefunc(attachedManager, "Hide", function(_, id)
+      -- The startup warmup hides inventory and then sets Ready in the same
+      -- callback. Retry after it finishes if the world-entry timer ran first.
+      if id == "inventory" and not bagnon.Ready then queueLoginOpen() end
+    end)
     attachExisting()
   end
 end
@@ -140,8 +156,10 @@ controller:SetScript("OnEvent", function(_, event, name)
       attachExisting()
       for _, state in pairs(states) do queueRestore(state) end
     end
+    queueLoginOpen()
   elseif event == "PLAYER_REGEN_ENABLED" then
     for _, state in pairs(states) do if state.pending then queueRestore(state) end end
+    queueLoginOpen()
   elseif event == "PLAYER_LOGIN" or (event == "ADDON_LOADED" and (name == ADDON or name == "Bagnon")) then
     initialize()
   end
@@ -152,7 +170,7 @@ SlashCmdList.DWDBAGNONHELPER = function()
   if not attachedManager then
     chat("Bagnon is not ready. Enable Bagnon and restart WoW.")
   else
-    chat("X-only closing is active for inventory. Map, Escape and bag toggles keep it open. Click its X to close.")
+    chat("Inventory opens at login. X-only closing is active; click its X to close.")
   end
 end
 

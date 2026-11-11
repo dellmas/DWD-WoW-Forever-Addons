@@ -1,7 +1,8 @@
-DWD Bagnon Helper - Forever 1.0.0-forever.1
+DWD Bagnon Helper 1.0.0-forever.3
 Requires Bagnon. Designed against Bagnon / BagBrother 12.1.8 on Forever 1.60.1.
 
-Open inventory normally. It stays open until you click its close X.
+Inventory opens automatically at login and after a UI reload. Click its X to
+close it. Changing zones does not reopen a closed inventory.
 Map maximization, Escape, bag hotkeys/backpack buttons, merchant/character
 window changes, combat/vehicle events, and other normal hide requests cannot
 close it. Bag hotkeys can still open a closed inventory. The X stays available
