@@ -3,7 +3,7 @@
 ![Dog Water Development](branding/DogWater.jpg)
 
 A CurseForge-recognized addon pack for **World of Warcraft: Forever 1.60.1**
-(interface 16001). Version **v1.0.15** contains **26 addon folders from 21
+(interface 16001). Version **v1.0.16** contains **26 addon folders from 21
 CurseForge projects**, including official Bartender4, Questie, QuestieDB, and
 all six DWD addons. Bundled modules appear under their parent project.
 
@@ -27,6 +27,13 @@ addon settings and inactive saved profile data are retained.
 
 The previous public ZIP downloads and legacy updater feeds have also had
 these addons removed. Each remaining addon saves its own settings.
+
+## Account-wide Tooltip Mover settings
+
+Tooltip Mover 1.1.0-forever.11 shares tooltip position, scale, font, lock state,
+and quest progress text position across characters on the same account. Your
+first settings edit establishes the shared layout. Existing character layouts
+are kept for migration. Run `/reload` after updating.
 
 ## Mob Kill Counter attribution
 

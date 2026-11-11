@@ -1,4 +1,4 @@
-WoW Forever Addon Pack v1.0.15
+WoW Forever Addon Pack v1.0.16
 Updated November 6, 2026: the DWD Profiles addons have been removed.
 This archive contains 26 addon folders. Use the latest release for current versions.
 
@@ -42,3 +42,8 @@ lag until moderation, refresh or app restart.
 Mob Kill Counter 0.0.1-forever.25 counts NPC killing blows reported for your
 character, pet, or vehicle. Forever may hide the attacker or victim in some
 content, and those deaths are skipped. Run /reload after updating.
+
+Tooltip Mover 1.1.0-forever.11 shares tooltip and quest text settings across
+characters on one account. The first edit establishes the shared layout.
+Existing character profiles are retained for migration. Run /reload after
+updating.

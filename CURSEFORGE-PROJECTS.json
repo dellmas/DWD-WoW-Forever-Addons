@@ -1,5 +1,5 @@
 {
-  "pack_version": "v1.0.15",
+  "pack_version": "v1.0.16",
   "game": "WoW Forever",
   "game_version": "1.60.1",
   "interface": 16001,
@@ -788,17 +788,17 @@
     {
       "name": "DWD Tooltip Mover",
       "project_id": 1342218,
-      "file_id": 9491696,
-      "filename": "DWD-TooltipMover-1.1.0-forever.10.zip",
-      "download_url": "https://edge.forgecdn.net/files/9491/696/DWD-TooltipMover-1.1.0-forever.10.zip",
-      "sha256": "2f11b31ddc97cc24070b1e2d86be0b550d8d08554eac9b14515c10f273d84361",
+      "file_id": 9551692,
+      "filename": "DWD-TooltipMover-1.1.0-forever.11.zip",
+      "download_url": "https://edge.forgecdn.net/files/9551/692/DWD-TooltipMover-1.1.0-forever.11.zip",
+      "sha256": "5f764ebda70c108de87d6b395e5d3562b9620ad1deee5ce0ef9f400c44539967",
       "folders": [
         "DWD_TooltipMover"
       ],
       "files": {
         "DWD_TooltipMover/DWDLogo.tga": "f6061afa84fef87aabe50a55eabf4f5efa303919decdec3fab8b83299bf9c5de",
-        "DWD_TooltipMover/DWD_TooltipMover.lua": "d1276d970c23be8b56c53974916c521d170be55dbb6a965ba160c9950d0ddfde",
-        "DWD_TooltipMover/DWD_TooltipMover.toc": "3e97ab6f719b974ff37011457e0bc4d51bcf1f90d519a521d69404f22983feb4",
+        "DWD_TooltipMover/DWD_TooltipMover.lua": "1d42171c6ee81ade5768df601d0876cf9caa5b80beab4203e96133e5c03c35f0",
+        "DWD_TooltipMover/DWD_TooltipMover.toc": "7b148ae49fe7434da177acd08c4528b577e40c7d236fe5ff2149e275e000b06a",
         "DWD_TooltipMover/ForeverIdentity.lua": "7f7b1cd22456e2d853171f5d7884a18a4ea50976815d24e7a81cdfdc973f512f"
       }
     },

@@ -2,7 +2,7 @@
 -- Move, scale, and restyle the main GameTooltip, with a small in-game GUI.
 
 local ADDON = ...
-local db
+local db, store
 
 -- LibSharedMedia (optional)
 local LSM = rawget(_G, "LibStub") and LibStub("LibSharedMedia-3.0", true)
@@ -29,7 +29,7 @@ local BUILTIN_FONTS = {
 local function copyInto(dst, src)
   for k,v in pairs(src) do
     if type(v) == "table" then
-      dst[k] = dst[k] or {}
+      if type(dst[k]) ~= "table" then dst[k] = {} end
       copyInto(dst[k], v)
     elseif dst[k] == nil then
       dst[k] = v
@@ -37,31 +37,37 @@ local function copyInto(dst, src)
   end
 end
 
-local function characterKey()
-  return DWD_ForeverIdentity.Key(false)
-end
-
 -- SavedVariables are available before an addon's Lua files execute.  Initialize
 -- synchronously because other addons can request a tooltip before ADDON_LOADED.
--- Keep character separation inside an account SavedVariables store because
--- Forever does not restore physical per-character files consistently.
 local function initializeDatabase()
-  local store = type(_G.DWD_TooltipMoverForeverStore) == "table"
+  store = type(_G.DWD_TooltipMoverForeverStore) == "table"
     and _G.DWD_TooltipMoverForeverStore or {}
   store.characters = type(store.characters) == "table" and store.characters or {}
   _G.DWD_TooltipMoverForeverStore = store
-  local key = characterKey()
-  db = DWD_ForeverIdentity.Adopt(store.characters, key)
-  if type(db) ~= "table" then
+  if type(store.shared) == "table" then
+    db = store.shared
+    _G.DWD_TooltipMoverDB = db
+  else
+    -- Preview this character's old settings until someone edits. Keep all
+    -- legacy profiles intact, and never inherit the last logged-in character.
+    local legacy = DWD_ForeverIdentity.Adopt(store.characters, DWD_ForeverIdentity.Key(false))
+    if type(legacy) ~= "table" then legacy = _G.DWD_TooltipMoverCharacterDB end
+    if type(legacy) ~= "table" and not next(store.characters) then legacy = _G.DWD_TooltipMoverDB end
     db = {}
-    local legacy = type(_G.DWD_TooltipMoverCharacterDB) == "table"
-      and _G.DWD_TooltipMoverCharacterDB or _G.DWD_TooltipMoverDB
     if type(legacy) == "table" then copyInto(db, legacy) end
-    store.characters[key] = db
   end
-  _G.DWD_TooltipMoverCharacterDB = db
-  _G.DWD_TooltipMoverDB = db
   copyInto(db, DEFAULTS)
+end
+
+local function saveSettings()
+  store.shared = db
+  _G.DWD_TooltipMoverDB = db
+end
+
+local function resetSettings()
+  for key in pairs(db) do db[key] = nil end
+  copyInto(db, DEFAULTS)
+  saveSettings()
 end
 
 initializeDatabase()
@@ -100,6 +106,7 @@ anchor:SetScript("OnDragStop", function(self)
   self:StopMovingOrSizing()
   local point, _, _, x, y = self:GetPoint(1)
   db.anchor.point, db.anchor.x, db.anchor.y = point, x, y
+  saveSettings()
   -- IMPORTANT: do NOT SetPoint(GameTooltip) here (avoids family conflict)
 end)
 
@@ -228,6 +235,7 @@ messageAnchor:SetScript("OnDragStop", function(self)
   if centerX and centerY then
     db.messageAnchor.x = centerX - (UIParent:GetWidth() / 2)
     db.messageAnchor.y = centerY - UIParent:GetHeight()
+    saveSettings()
   end
   placeMessageFrame()
   testMessage()
@@ -506,6 +514,7 @@ local function showGUI()
   lockCheck:SetPoint("TOPLEFT", 24, -50)
   lockCheck:SetScript("OnClick", function(self)
     db.locked = self:GetChecked() and true or false
+    saveSettings()
     placeAnchor()
   end)
 
@@ -519,6 +528,7 @@ local function showGUI()
     self.ValueText:SetText(string.format("%.2fx (%d%%)", v, math.floor(v * 100 + 0.5)))
     if not refreshingValues then
       db.scale = v
+      saveSettings()
       applyScale(true)
     end
   end)
@@ -531,6 +541,7 @@ local function showGUI()
     self.ValueText:SetText(tostring(v) .. " pt")
     if not refreshingValues then
       db.fontSize = v
+      saveSettings()
       applyFonts()
     end
   end)
@@ -548,6 +559,7 @@ local function showGUI()
   local function SetFontByName(name)
     if not name then return end
     db.fontKey = name
+    saveSettings()
     applyFonts()
     UIDropDownMenu_SetText(fontDD, name)
   end
@@ -577,8 +589,7 @@ local function showGUI()
   defaultsBtn:SetPoint("BOTTOMLEFT", 24, 20)
   defaultsBtn:SetText("Defaults")
   defaultsBtn:SetScript("OnClick", function()
-    for k in pairs(db) do db[k] = nil end
-    copyInto(db, DEFAULTS)
+    resetSettings()
     placeAnchor(); applyScale(); applyFonts(); placeMessageFrame()
     gui:RefreshValues()
     printMsg("Settings reset to defaults.")
@@ -619,9 +630,9 @@ SlashCmdList["DWDTM"] = function(msg)
   if msg == "config" or msg == "gui" or msg == "options" then
     showGUI()
   elseif msg == "lock" then
-    db.locked = true; placeAnchor(); printMsg("locked anchor.")
+    db.locked = true; saveSettings(); placeAnchor(); printMsg("locked anchor.")
   elseif msg == "unlock" then
-    db.locked = false; placeAnchor(); printMsg("unlocked anchor (drag to reposition).")
+    db.locked = false; saveSettings(); placeAnchor(); printMsg("unlocked anchor (drag to reposition).")
   elseif msg == "messages" or msg == "message" or msg == "questtext" then
     toggleMessageAnchor()
     printMsg("quest progress text anchor toggled; drag it, then right-click to hide.")
@@ -629,20 +640,20 @@ SlashCmdList["DWDTM"] = function(msg)
     placeMessageFrame(); testMessage()
   elseif msg == "messagereset" then
     db.messageAnchor = {x = DEFAULTS.messageAnchor.x, y = DEFAULTS.messageAnchor.y}
+    saveSettings()
     placeMessageFrame(); testMessage()
     printMsg("quest progress text position reset.")
   elseif msg:match("^scale%s+") then
     local s = tonumber(msg:match("^scale%s+([%d%.]+)"))
-    if s and s >= 0.5 and s <= 3.0 then db.scale = s; applyScale(true); printMsg(("scale set to %.2f"):format(s)) end
+    if s and s >= 0.5 and s <= 3.0 then db.scale = s; saveSettings(); applyScale(true); printMsg(("scale set to %.2f"):format(s)) end
   elseif msg:match("^fontsize%s+") then
     local n = tonumber(msg:match("^fontsize%s+([%d]+)"))
-    if n and n >= 8 and n <= 28 then db.fontSize = n; applyFonts(); printMsg(("font size set to %d"):format(n)) end
+    if n and n >= 8 and n <= 28 then db.fontSize = n; saveSettings(); applyFonts(); printMsg(("font size set to %d"):format(n)) end
   elseif msg:match("^font%s+") then
     local name = msg:match("^font%s+(.+)")
-    if name and #name > 0 then db.fontKey = name; applyFonts(); printMsg("font set to "..db.fontKey) end
+    if name and #name > 0 then db.fontKey = name; saveSettings(); applyFonts(); printMsg("font set to "..db.fontKey) end
   elseif msg == "reset" then
-    for k in pairs(db) do db[k] = nil end
-    copyInto(db, DEFAULTS)
+    resetSettings()
     placeAnchor(); applyScale(); applyFonts(); placeMessageFrame()
     printMsg("settings reset.")
   else
@@ -672,9 +683,6 @@ f:SetScript("OnEvent", function(_, ev, arg1)
   if ev == "ADDON_LOADED" and arg1 == ADDON then
     initializeDatabase()
   elseif ev == "PLAYER_LOGIN" then
-    if not LSM and not BUILTIN_FONTS[db.fontKey] then
-      db.fontKey = DEFAULTS.fontKey
-    end
     placeAnchor()
     applyScale()
     applyFonts()
